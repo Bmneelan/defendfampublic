@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DefendFam — Independent Security Guidance</title>
+<meta name="description" content="Independent security guidance. We diagnose the threat first and recommend tools second.">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  :root {
+    --accent: #185FA5;
+    --accent-light: #6fa8db;
+    --cream: #f4f0e8;
+    --cream-card: #fdfaf3;
+    --border: #e8e0d2;
+    --border-2: #ece3d4;
+    --dark: #16181d;
+    --dark-card: #1c1f26;
+    --ink: #16181d;
+    --ink-soft: #4d473d;
+    --ink-mute: #5f574a;
+    --label: #948a77;
+  }
+  ::selection { background: rgba(24,95,165,0.18); }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1120px; margin: 0 auto; padding: 13px clamp(16px,4vw,32px);
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: center; gap: 9px; cursor: pointer; }
+  .brand-mark { width: 22px; height: 22px; border: 2px solid var(--accent); border-radius: 5px; display: flex; align-items: center; justify-content: center; }
+  .brand-mark span { width: 7px; height: 7px; background: var(--accent); border-radius: 1px; display: block; }
+  .brand-name { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
+  .nav-items { display: flex; align-items: center; gap: clamp(4px,1.6vw,8px); flex-wrap: wrap; }
+  .nav-link {
+    font-size: 14px; font-weight: 500; color: var(--ink-soft); padding: 7px 11px; border-radius: 8px;
+    cursor: pointer; text-decoration: none; white-space: nowrap; background: transparent;
+    transition: color .15s, background .15s; border: none; font-family: inherit;
+  }
+  .nav-link.active { font-weight: 600; color: var(--accent); background: rgba(24,95,165,0.10); }
+  main { max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px,4vw,32px); }
+  section[data-section] { display: none; }
+  section[data-section].active { display: block; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+  h1 { font-size: clamp(40px,8.5vw,76px); line-height: 0.96; font-weight: 800; letter-spacing: -0.04em; margin: 0; max-width: 13ch; }
+  .lede { font-size: clamp(16px,2.2vw,21px); line-height: 1.5; color: var(--ink-mute); max-width: 52ch; margin: 22px 0 0; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 16px; }
+  .card {
+    background: var(--cream-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px;
+    cursor: pointer; transition: transform .15s, box-shadow .15s, border-color .15s; display: flex; flex-direction: column;
+    text-align: left; font-family: inherit; color: inherit;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(16,24,40,0.08); border-color: #d8cfbf; }
+  .card-icon { width: 44px; height: 44px; border-radius: 11px; background: #e7eef7; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .risk-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); }
+  .card h3 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 8px; }
+  .card p { font-size: 14.5px; line-height: 1.55; color: var(--ink-mute); margin: 0 0 18px; }
+  .card-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border-2); display: flex; flex-direction: column; gap: 12px; }
+  .stat-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .stat-big { font-family: 'IBM Plex Mono', monospace; font-size: 21px; color: var(--ink); font-weight: 600; letter-spacing: -0.02em; }
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.05em; text-transform: uppercase; color: #857b69; border: 1px solid var(--border); border-radius: 20px; padding: 3px 8px; }
+  .badge .dot { color: var(--accent); }
+  .cta-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; color: var(--accent); }
+  .why-box { background: var(--dark); border-radius: 20px; padding: clamp(28px,4.5vw,52px); color: #f1ece3; margin: 40px 0 clamp(40px,5vw,56px); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: clamp(24px,4vw,48px); align-items: start; }
+  .why-box h2 { font-size: clamp(24px,3.6vw,34px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; margin: 0; }
+  .why-list { display: flex; flex-direction: column; gap: 11px; }
+  .why-item { display: flex; gap: 11px; align-items: flex-start; }
+  .why-item .mark { color: var(--accent-light); font-weight: 700; }
+  .why-item span.txt { font-size: 14.5px; line-height: 1.5; color: #ddd3c2; }
+  section .inner { padding: clamp(40px,6vw,72px) 0; }
+  h2.brief-h { font-size: clamp(28px,5vw,46px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin: 0; max-width: 18ch; }
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 20px; margin-top: 36px; align-items: stretch; }
+  .stat-block { background: var(--dark); border-radius: 18px; padding: clamp(26px,3.5vw,38px); color: #fdfaf3; display: flex; flex-direction: column; justify-content: center; }
+  .stat-num { font-size: clamp(48px,9vw,84px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+  .stat-desc { font-size: 15px; color: #bbb1a0; margin-top: 10px; max-width: 32ch; }
+  .stat-source { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent-light); }
+  .panel { background: var(--cream-card); border: 1px solid var(--border); border-radius: 18px; padding: clamp(24px,3vw,32px); }
+  .bars { display: flex; align-items: flex-end; gap: clamp(8px,2vw,18px); height: 150px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
+  .bar { width: 100%; border-radius: 6px 6px 0 0; }
+  .section-block { margin-top: 48px; }
+  .block-label { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); margin-bottom: 16px; }
+  .why-targeted-grid, .vector-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; }
+  .mini-card { background: var(--cream-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+  .mini-card h4 { font-weight: 700; font-size: 15.5px; margin: 0 0 6px; }
+  .mini-card p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-mute); }
+  .vector-card { background: #1c1f26; border: 1px solid #2c313b; border-radius: 14px; padding: 22px; color: #f1ece3; }
+  .vector-card .vlabel { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent-light); margin-bottom: 10px; }
+  .vector-card h4 { font-weight: 700; font-size: 15.5px; margin: 0 0 6px; }
+  .vector-card p { margin: 0; font-size: 14px; line-height: 1.55; color: #bbb1a0; }
+  .guidance-label { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  h3.guidance-h { font-size: clamp(20px,3vw,26px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 20px; }
+  .step-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 16px; }
+  .step-card { background: var(--cream-card); border: 1px solid var(--border); border-radius: 16px; padding: 26px; display: flex; flex-direction: column; }
+  .step-num { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 14px; }
+  .step-card h4 { font-weight: 700; font-size: 17px; margin: 0 0 8px; }
+  .step-card p { font-size: 14px; line-height: 1.55; color: var(--ink-mute); margin: 0 0 16px; }
+  .step-cost { margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--label); }
+  .priority-row { background: var(--cream-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .priority-num { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 600; color: var(--accent); min-width: 36px; }
+  .priority-row h4 { font-weight: 700; font-size: 16.5px; margin: 0 0 4px; }
+  .priority-row p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-mute); }
+  .priority-stack { display: flex; flex-direction: column; gap: 12px; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 9px; background: var(--accent); color: #fdfaf3; padding: 15px 24px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; cursor: pointer; border: none; font-family: inherit; margin-top: 26px; }
+  .cta-btn:hover { filter: brightness(0.92); }
+  .donut-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; }
+  .donut { width: 148px; height: 148px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .donut-inner { width: 104px; height: 104px; border-radius: 50%; background: var(--cream-card); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .donut-inner .num { font-size: 32px; font-weight: 800; letter-spacing: -0.03em; }
+  .two-col { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 16px; margin-top: 36px; }
+  .article-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(290px,1fr)); gap: 18px; margin-top: 40px; }
+  article { background: var(--cream-card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: transform .15s, box-shadow .15s; }
+  article:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(16,24,40,0.09); }
+  .art-fig { height: 150px; background: repeating-linear-gradient(135deg,#e6edf6,#e6edf6 10px,#dbe6f2 10px,#dbe6f2 20px); display: flex; align-items: flex-end; padding: 16px; }
+  .art-fig span { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--label); background: var(--cream-card); padding: 4px 9px; border-radius: 5px; }
+  .art-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+  .art-cat { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--label); margin-bottom: 12px; }
+  article h3 { font-size: 18.5px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.3; margin: 0 0 10px; }
+  article p { font-size: 14px; line-height: 1.55; color: var(--ink-mute); margin: 0; flex: 1; }
+  footer { border-top: 1px solid var(--border); background: var(--cream-card); margin-top: 24px; }
+  .footer-inner { max-width: 1120px; margin: 0 auto; padding: clamp(36px,5vw,56px) clamp(16px,4vw,32px); }
+  .footer-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 32px; }
+  .footer-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a59a86; margin-bottom: 14px; }
+  .footer-brand p { font-size: 13.5px; line-height: 1.6; color: #6f675a; margin: 0; max-width: 34ch; }
+  .footer-sources { display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; color: #6f675a; line-height: 1.4; }
+  .footer-disclosure p { font-size: 12.5px; line-height: 1.6; color: #6f675a; margin: 0; max-width: 34ch; }
+  .copyright { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--border-2); font-size: 12px; color: #a59a86; font-family: 'IBM Plex Mono', monospace; }
+  .quick-answer { background: var(--cream-card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 22px 26px; margin: 28px 0 40px; }
+  .quick-answer .qa-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .quick-answer p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+  .fork-box { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 16px; margin: 32px 0 clamp(40px,5vw,56px); }
+  .fork-card { background: var(--cream-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: left; cursor: pointer; font-family: inherit; }
+  .fork-card:hover { border-color: #d8cfbf; }
+  .fork-card .flabel { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label); margin-bottom: 6px; }
+  .fork-card h4 { font-weight: 700; font-size: 17px; margin: 0 0 6px; }
+  .fork-card p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-mute); }
+  .support-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; }
+  .vendor-card { background: var(--cream-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+  .vendor-card .vkind { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .vendor-card h4 { font-weight: 700; font-size: 16px; margin: 0 0 6px; }
+  .vendor-card p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink-mute); }
+  .about-lede { font-size: clamp(17px,2.4vw,22px); line-height: 1.5; color: var(--ink-soft); max-width: 58ch; margin: 22px 0 40px; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand" data-goto="home">
+      <div class="brand-mark"><span></span></div>
+      <span class="brand-name">DefendFam</span>
+    </div>
+    <div class="nav-items">
+      <button class="nav-link" data-goto="home">Home</button>
+      <button class="nav-link" data-goto="elder">Elders</button>
+      <button class="nav-link" data-goto="teen">Teens</button>
+      <button class="nav-link" data-goto="finance">Finance</button>
+      <button class="nav-link" data-goto="blog">Briefings</button>
+      <button class="nav-link" data-goto="about">About</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HOME -->
+  <section data-section="home" class="active">
+    <div class="inner" style="padding-bottom:22px;">
+      <div class="eyebrow mono">Independent security guidance</div>
+      <h1>Is the threat real?</h1>
+      <p class="lede">Most identity-protection subscriptions defend you from threats you'll never face. Find out exactly where you're exposed — before you sign another one.</p>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap;">
+      <span class="mono" style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--label);white-space:nowrap;">Start here — pick your exposure</span>
+      <span style="flex:1;min-width:40px;height:1px;background:var(--border);"></span>
+      <a href="#why" class="mono" style="font-size:12px;color:var(--accent);text-decoration:none;white-space:nowrap;">How we stay honest →</a>
+    </div>
+
+    <div class="grid-3" style="padding-bottom:clamp(40px,5vw,56px);">
+      <button class="card" data-goto="elder">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="var(--accent)"/></svg></div>
+        <div class="risk-label mono">Risk 01</div>
+        <h3>Elders &amp; deepfake fraud</h3>
+        <p>AI-cloned voices impersonate family in crisis. The fastest-growing fraud aimed at people over 60.</p>
+        <div class="card-foot">
+          <div class="stat-row"><span class="stat-big mono">$1.6B</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
+          <span class="cta-link">Assess elder exposure <span class="mono">→</span></span>
+        </div>
+      </button>
+      <button class="card" data-goto="teen">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7"><rect x="5" y="5" width="14" height="14" rx="2" transform="rotate(45 12 12)"/></svg></div>
+        <div class="risk-label mono">Risk 02</div>
+        <h3>Teens &amp; identity theft</h3>
+        <p>A clean credit file and an oversharing habit make young adults the highest-yield target for synthetic fraud.</p>
+        <div class="card-foot">
+          <div class="stat-row"><span class="stat-big mono">42% CAGR</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
+          <span class="cta-link">Assess teen exposure <span class="mono">→</span></span>
+        </div>
+      </button>
+      <button class="card" data-goto="finance">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7"><rect x="4" y="7" width="12" height="12" rx="2"/><rect x="8" y="3" width="12" height="12" rx="2"/></svg></div>
+        <div class="risk-label mono">Risk 03</div>
+        <h3>Financial account takeover</h3>
+        <p>One reused password is the door to every account you own. The mechanics are simple — and preventable.</p>
+        <div class="card-foot">
+          <div class="stat-row"><span class="stat-big mono">81%</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
+          <span class="cta-link">Run account security audit <span class="mono">→</span></span>
+        </div>
+      </button>
+    </div>
+
+    <div class="section-block" style="margin-top:0;">
+      <div class="block-label mono">One thing before you dig in</div>
+      <div class="fork-box">
+        <button class="fork-card" data-goto="elder">
+          <div class="flabel mono">I'm here for</div>
+          <h4>My family</h4>
+          <p>Guidance for parents and adult children protecting the people closest to them. That's everything below.</p>
+        </button>
+        <div class="fork-card" style="cursor:default;">
+          <div class="flabel mono">Coming later</div>
+          <h4>My business</h4>
+          <p>The same underlying threats, credential stuffing, account takeover, social engineering, apply directly to small businesses too. A dedicated track is planned.</p>
+        </div>
+      </div>
+
+      <div class="block-label mono">Who is being targeted</div>
+      <p style="font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:62ch;margin:0 0 16px;">Cyber risk touches everyone, but the instinct to recognize a scam in progress isn't the same at every age. A 25-year-old and an 85-year-old don't carry the same built-in defenses, the same skepticism, or the same digital fluency. We looked at where cyber criminals concentrate their effort and identified the three groups facing the highest, most distinct exposure.</p>
+      <p style="font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:62ch;margin:0 0 40px;">We'll help anyone who comes to this site, but these three are where we start, because they're where the real damage is happening: elders, whose trust in a familiar voice is being weaponized by cloned audio; teens, whose unmonitored credit files quietly become someone else's raw material; and everyday account holders, whose reused passwords are the single most common door criminals walk through.</p>
+    </div>
+
+    <div id="why" class="why-box">
+      <div class="why-grid">
+        <div>
+          <div class="eyebrow mono" style="color:var(--accent-light);">Why DefendFam</div>
+          <h2>We make money when you buy. So we only recommend what survives our own scrutiny.</h2>
+        </div>
+        <div class="why-list">
+          <p style="font-size:15.5px;line-height:1.6;color:#c4baa9;margin:0;">DefendFam earns affiliate commission on some tools we link to. That's exactly why our diagnosis comes first and the product comes last. If the honest answer is "you don't need to buy anything," we say so.</p>
+          <div class="why-list">
+            <div class="why-item"><span class="mark">◆</span><span class="txt">Threat-first, not product-first. We start with how you're actually exposed.</span></div>
+            <div class="why-item"><span class="mark">◆</span><span class="txt">Every statistic links to a primary source — FBI IC3, FTC, Verizon DBIR.</span></div>
+            <div class="why-item"><span class="mark">◆</span><span class="txt">Every recommendation is reviewed against the source data before it ships.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELDER -->
+  <section data-section="elder">
+    <div class="inner">
+      <div class="eyebrow mono">Threat brief 01 — Deepfake fraud</div>
+      <h2 class="brief-h">The voice asking for money sounds exactly like family.</h2>
+
+      <div class="quick-answer">
+        <div class="qa-label mono">Quick answer</div>
+        <p>Is a family safe word enough to stop an AI voice-cloning scam? Not by itself. It stops a scammer who doesn't know the word, but a determined one can talk around it or fake enough distress to avoid answering, which is why calling back on a number you already had saved matters just as much. Full breakdown below.</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-block">
+          <div class="stat-num">$2.4B</div>
+          <div class="stat-desc">Total fraud losses reported by adults 60+ in 2024, per the FTC's December 2025 report — roughly four times the $600M reported in 2020. The FTC's own estimate of the true cost, accounting for underreporting, runs as high as $81.5B.</div>
+          <div class="stat-source mono"><span>◆</span> Source verified · FTC (Dec 2025) <span style="color:#857a68;">[1]</span></div>
+        </div>
+        <div class="panel">
+          <div style="font-size:13px;font-weight:600;color:var(--ink-mute);margin-bottom:4px;">Imposter-scam losses, indexed</div>
+          <div class="mono" style="font-size:11px;color:#a59a86;margin-bottom:22px;">2021 → 2025</div>
+          <div class="bars">
+            <div class="bar-col"><div class="bar" style="height:34%;background:#dbe6f2;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'21</span></div>
+            <div class="bar-col"><div class="bar" style="height:48%;background:#dbe6f2;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'22</span></div>
+            <div class="bar-col"><div class="bar" style="height:62%;background:#7fb0e0;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'23</span></div>
+            <div class="bar-col"><div class="bar" style="height:80%;background:#3a7cc4;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'24</span></div>
+            <div class="bar-col"><div class="bar" style="height:100%;background:var(--accent);"></div><span class="mono" style="font-size:11px;color:var(--ink);font-weight:600;">'25</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label mono">Why elders are targeted</div>
+        <div class="why-targeted-grid">
+          <div class="mini-card"><h4>Trust in the voice</h4><p>A familiar voice short-circuits skepticism. Cloning needs only seconds of audio from social media.</p></div>
+          <div class="mini-card"><h4>Manufactured urgency</h4><p>"I'm in jail / in an accident — don't tell anyone." Panic is the exploit, not technology.</p></div>
+          <div class="mini-card"><h4>Untraceable payment</h4><p>Gift cards, wire transfers and crypto are requested precisely because they can't be reversed.</p></div>
+          <div class="mini-card"><h4>Isolation by design</h4><p>"Keep this between us" prevents the one thing that stops the scam — a second opinion.</p></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="guidance-label mono">The guidance</div>
+        <h3 class="guidance-h">Three moves, in order of impact</h3>
+        <div class="step-grid">
+          <div class="step-card"><div class="step-num mono">01</div><h4>Set a family safe-word</h4><p>Not absolute on its own — a determined scammer can talk around it. Pair it with rule two below.</p><span class="step-cost mono">COST: $0</span></div>
+          <div class="step-card"><div class="step-num mono">02</div><h4>Call back on a saved number</h4><p>Never the number that called you, that can be spoofed too. Use one you already had.</p><span class="step-cost mono">COST: $0</span></div>
+          <div class="step-card"><div class="step-num mono">03</div><h4>Identity monitoring</h4><p>Catches the downstream damage — new accounts, address changes — when a scam does land.</p><span class="step-cost mono">COST: PAID TOOL</span></div>
+        </div>
+        <button class="cta-btn" data-goto="blog">Run elder fraud check <span class="mono">→</span></button>
+      </div>
+
+      <div class="section-block">
+        <div class="guidance-label mono">Looking for immediate support?</div>
+        <h3 class="guidance-h">Some of this you can do yourself. Some works better with help.</h3>
+        <div class="block-label mono" style="margin-top:0;">Software you manage yourself</div>
+        <div class="support-grid" style="margin-bottom:28px;">
+          <div class="vendor-card"><div class="vkind mono">Family-shared monitoring</div><h4>Aura</h4><p>Plans let an adult child and a parent share one account across households, alerts visible to everyone on the plan.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Largest coverage</div><h4>LifeLock</h4><p>The most brand recognition of any option here, plus the largest identity-theft insurance and reimbursement coverage.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Built for caregiving</div><h4>EverSafe</h4><p>Senior-specific discount, shared family alerts, and monitoring that extends to investment and retirement accounts.</p></div>
+        </div>
+        <div class="block-label mono">Support with a person or institution behind it</div>
+        <div class="support-grid">
+          <div class="vendor-card"><div class="vkind mono">Free · live person</div><h4>AARP Fraud Watch Network</h4><p>1-877-908-3360. Free, not limited to AARP members, and staffed by someone trained specifically for this.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Spending controls</div><h4>True Link Financial</h4><p>A prepaid card with spending limits and category restrictions a family member controls directly.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Free · through your bank</div><h4>Caregiver Banking</h4><p>Huntington, Wells Fargo, and KeyBank now offer view-only or spending-limited access for a trusted family member.</p></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="guidance-label mono">If money has already been sent</div>
+        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;">Speed matters more than which form gets filed first. Wire transfer: call Western Union's fraud hotline (800-448-1492) or MoneyGram (1-800-926-9400) immediately, a narrow reversal window sometimes exists. Gift card: call the number on the back of the card before the balance is drained. Then file with the FTC at reportfraud.ftc.gov and, for cross-border cases, the FBI's IC3 at ic3.gov.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEEN -->
+  <section data-section="teen">
+    <div class="inner">
+      <div class="eyebrow mono">Threat brief 02 — Identity theft &amp; more</div>
+      <h2 class="brief-h">A clean credit file is the most valuable thing a teenager owns. It isn't the only thing being targeted.</h2>
+
+      <div class="quick-answer">
+        <div class="qa-label mono">Quick answer</div>
+        <p>What are teens actually targeted for? Four distinct things: synthetic identity fraud on an unmonitored credit file, everyday scams inside the apps and games teens already use, financial sextortion, and AI-generated fake explicit images. Each needs a different response, covered below.</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-block">
+          <div class="stat-num">42%</div>
+          <div class="stat-desc">Annual growth rate of synthetic-identity fraud — the fastest-rising category, and minors are the preferred raw material.</div>
+          <div class="stat-source mono"><span>◆</span> Source verified · FTC / industry CAGR <span style="color:#857a68;">[2]</span></div>
+        </div>
+        <div class="panel" style="display:flex;flex-direction:column;justify-content:center;gap:16px;">
+          <div style="font-size:13px;font-weight:600;color:var(--ink-mute);">Why the file is unguarded</div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;"><span style="color:var(--ink);">Teens who check their credit</span><span class="mono" style="color:var(--ink);font-weight:600;">~7%</span></div>
+              <div style="height:9px;background:var(--border-2);border-radius:5px;overflow:hidden;"><div style="width:7%;height:100%;background:#7fb0e0;border-radius:5px;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;"><span style="color:var(--ink);">Fraud unnoticed until first loan/job</span><span class="mono" style="color:var(--ink);font-weight:600;">years</span></div>
+              <div style="height:9px;background:var(--border-2);border-radius:5px;overflow:hidden;"><div style="width:88%;height:100%;background:var(--accent);border-radius:5px;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label mono">Four threat vectors</div>
+        <div class="vector-grid">
+          <div class="vector-card"><div class="vlabel mono">VECTOR 01</div><h4>Social-media impersonation</h4><p>Cloned profiles harvest trust from friends, then run scams in the victim's name.</p></div>
+          <div class="vector-card"><div class="vlabel mono">VECTOR 02</div><h4>Credential reuse</h4><p>One leaked game-forum password unlocks email, banking and everything chained to it.</p></div>
+          <div class="vector-card"><div class="vlabel mono">VECTOR 03</div><h4>Data-broker sales</h4><p>Names, ages and addresses are packaged and sold legally — assembling a profile to exploit.</p></div>
+          <div class="vector-card"><div class="vlabel mono">VECTOR 04</div><h4>Synthetic identity</h4><p>A real SSN fused with a fake name builds credit for years before anyone notices.</p></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="guidance-label mono">The guidance</div>
+        <h3 class="guidance-h">Three moves, in order of impact</h3>
+        <div class="step-grid">
+          <div class="step-card"><div class="step-num mono">01</div><h4>Freeze the credit file</h4><p>Free at all three bureaus. A frozen file can't be used to open accounts — the single highest-impact move.</p><span class="step-cost mono">COST: $0</span></div>
+          <div class="step-card"><div class="step-num mono">02</div><h4>Password manager + unique logins</h4><p>Breaks credential reuse so one leak stays contained to one account.</p><span class="step-cost mono">COST: LOW / FREE TIER</span></div>
+          <div class="step-card"><div class="step-num mono">03</div><h4>Data-broker removal</h4><p>Shrinks the public profile fraudsters build from. Doable manually, or via a removal service.</p><span class="step-cost mono">COST: TIME OR PAID TOOL</span></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label mono">The everyday scams teens actually run into</div>
+        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;margin-bottom:16px;">This is where parent-and-teen credibility gets built or lost. A warning about identity theft can feel abstract to a teen who's never seen it happen — a warning about the exact Robux scam a friend fell for last week lands immediately.</p>
+        <div class="why-targeted-grid">
+          <div class="mini-card"><h4>"Free Robux" apps</h4><p>Suspected gaming fraud rose 53% year-over-year in 2026; Roblox alone saw ~1.65M attempted attacks. Spin-wheel apps keep teens one step from a payout that never comes.</p></div>
+          <div class="mini-card"><h4>Discord escalation</h4><p>Roblox chat is filtered; Discord isn't. Predatory adults move conversations there, building rapport over days before asking for credentials or money.</p></div>
+          <div class="mini-card"><h4>Fake Instagram brand deals</h4><p>A DM collaboration offer that leads to a phishing link or a "contract" asking for payment or login credentials before anything official happens.</p></div>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label mono">Financial sextortion — one of the fastest-growing threats to teens</div>
+        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;">NCMEC received more than 50,000 reports of financially motivated sextortion in 2025, an average of 137 a day, up from 36,000 the year before. The pattern: a stranger poses as a peer, moves the conversation to a private app, then extorts payment after getting an image. Reports skew heavily toward boys 14–17. The most important thing to say in advance: paying does not make it stop, and if it's already happened, the teen is not in trouble and not to blame.</p>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label mono">AI-generated images: the "nudify" problem</div>
+        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;">No real image is required — "nudify" apps generate a fake explicit image from an ordinary, already-public photo. The federal TAKE IT DOWN Act (May 2025) requires covered platforms to remove a valid report within 48 hours. NCMEC's free Take It Down service (takeitdown.ncmec.org) fingerprints the image so platforms can detect and remove it without it ever being uploaded anywhere — the same response whether the image is real or AI-generated.</p>
+        <button class="cta-btn" data-goto="blog">Assess teen exposure <span class="mono">→</span></button>
+      </div>
+
+      <div class="section-block">
+        <div class="guidance-label mono">Looking for immediate support?</div>
+        <h3 class="guidance-h">This one spreads across more ground than the elder page.</h3>
+        <div class="block-label mono" style="margin-top:0;">Software you manage yourself</div>
+        <div class="support-grid" style="margin-bottom:28px;">
+          <div class="vendor-card"><div class="vkind mono">Identity + gaming safety</div><h4>Aura</h4><p>Standard identity monitoring plus parental controls covering ~200 games and platforms including Discord, built to catch grooming and harassment.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Behavioral monitoring</div><h4>Bark</h4><p>Monitors texts, social media, and gaming chat for predatory contact, bullying, and self-harm risk signals — alerts sent directly to a parent.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Credit + identity</div><h4>LifeLock</h4><p>Same brand recognition and insurance coverage as the elder page, with family plans covering a teen's still-blank credit file.</p></div>
+        </div>
+        <div class="block-label mono">Support with a person or institution behind it</div>
+        <div class="support-grid">
+          <div class="vendor-card"><div class="vkind mono">Free · highest impact</div><h4>Credit freeze</h4><p>Free at all three bureaus, takes minutes, and closes the identity-theft exploit outright.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Free · built for this</div><h4>NCMEC Take It Down</h4><p>takeitdown.ncmec.org — the right anchor for anything image-related, sextortion or AI-generated.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Free · often faster</div><h4>The school</h4><p>If classmates or a shared platform are involved, the school can often act faster than any app or hotline.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCE -->
+  <section data-section="finance">
+    <div class="inner">
+      <div class="eyebrow mono">Threat brief 03 — Account takeover</div>
+      <h2 class="brief-h">One reused password is the door to every account you own.</h2>
+
+      <div class="quick-answer">
+        <div class="qa-label mono">Quick answer</div>
+        <p>Is a password manager still enough in 2026? Mostly, but it's no longer the strongest option. A unique password per site stops the most common attack outright. The stronger fix, where offered, is a passkey, which removes the reusable password entirely rather than just managing it better.</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-block">
+          <div class="stat-num">22%</div>
+          <div class="stat-desc">Of all confirmed 2025 breaches started with stolen or reused credentials — 88% of attacks on basic web applications specifically, per Verizon's 2025 DBIR. Separately, 36% of people say one of their own accounts has already been compromised this way (FIDO Alliance, 2025).</div>
+          <div class="stat-source mono"><span>◆</span> Source verified · Verizon 2025 DBIR <span style="color:#857a68;">[4]</span></div>
+        </div>
+        <div class="panel donut-wrap">
+          <div class="donut" style="background:conic-gradient(var(--accent) 0% 88%, var(--border-2) 88% 100%);">
+            <div class="donut-inner"><div class="num">88%</div></div>
+          </div>
+          <div style="font-size:13.5px;color:var(--ink-mute);line-height:1.5;max-width:30ch;">of attacks on basic web applications involve stolen or reused credentials. <span class="mono" style="font-size:11px;color:var(--label);">— Verizon 2025 DBIR [4]</span></div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="mini-card" style="padding:28px;border-radius:16px;">
+          <div class="block-label mono" style="margin-bottom:12px;">The core mechanic</div>
+          <h4 style="font-weight:700;font-size:18px;margin-bottom:10px;">Credential stuffing</h4>
+          <p>A breach leaks your email + password from one site. Bots replay that pair against thousands of banks and retailers automatically. Reuse the password anywhere and the attack succeeds — no "hacking" required.</p>
+        </div>
+        <div class="mini-card" style="padding:28px;border-radius:16px;">
+          <div class="mono" style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Emerging — Deepfake video</div>
+          <h4 style="font-weight:700;font-size:18px;margin-bottom:10px;">Liveness checks under attack</h4>
+          <p>Banks increasingly verify big transfers with video selfies. Synthetic-video tooling now defeats some liveness checks, turning "see my face" into a forgeable credential. MFA that isn't tied to a device is the weak point.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label mono">The stronger option — passkeys</div>
+        <div class="mini-card" style="padding:24px;">
+          <p style="margin:0;">A passkey does away with the shared secret entirely rather than protecting it better — nothing stored that a breach can leak, nothing to type that a fake login page can capture. It resists both credential stuffing and phishing in a way password-plus-MFA setups aren't quite. Support is still uneven across sites, so a password manager remains the right fallback everywhere passkeys aren't offered yet.</p>
+        </div>
+      </div>
+
+      <div class="section-block">
+        <div class="guidance-label mono">The guidance</div>
+        <h3 class="guidance-h">Three priorities, do them in this order</h3>
+        <div class="priority-stack">
+          <div class="priority-row"><div class="priority-num mono">P1</div><div><h4>Password manager or passkey</h4><p>Closes the door credential stuffing walks through. Everything else is secondary to this.</p></div></div>
+          <div class="priority-row"><div class="priority-num mono">P2</div><div><h4>Device-bound MFA</h4><p>For accounts that don't yet support passkeys. An authenticator app or hardware key resists deepfake and SIM-swap attacks.</p></div></div>
+          <div class="priority-row"><div class="priority-num mono">P3</div><div><h4>Breach monitoring</h4><p>The safety net that catches a leaked credential before bots get there, not the wall itself.</p></div></div>
+        </div>
+        <button class="cta-btn" data-goto="blog">Run account security audit <span class="mono">→</span></button>
+      </div>
+
+      <div class="section-block">
+        <div class="guidance-label mono">Looking for immediate support?</div>
+        <h3 class="guidance-h">This one's about prevention more than recovery.</h3>
+        <div class="block-label mono" style="margin-top:0;">Software you manage yourself</div>
+        <div class="support-grid" style="margin-bottom:28px;">
+          <div class="vendor-card"><div class="vkind mono">Free · full featured</div><h4>Bitwarden</h4><p>Core password manager, including passkey storage and sync, is genuinely free — not a limited trial.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Paid step-up</div><h4>1Password</h4><p>Shared vaults, built-in breach monitoring that flags a saved login the moment it leaks, mature passkey support.</p></div>
+          <div class="vendor-card"><div class="vkind mono">The ceiling</div><h4>YubiKey</h4><p>A physical key that makes phishing and credential stuffing structurally impossible — worth it for email and banking.</p></div>
+        </div>
+        <div class="block-label mono">Support with a person or institution behind it</div>
+        <div class="support-grid">
+          <div class="vendor-card"><div class="vkind mono">Free · industry standard</div><h4>Have I Been Pwned</h4><p>Check an email address against known breach data in seconds, the standard first move.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Free · already available</div><h4>Bank alerts</h4><p>Most banks offer free login and transaction alerts that go unused simply because they were never turned on.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Free · at all 3 bureaus</div><h4>Credit fraud alerts</h4><p>Lighter than a full freeze — adds a verification step before new credit can be opened in your name.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section data-section="blog">
+    <div class="inner">
+      <div class="eyebrow mono">Threat briefings</div>
+      <h2 class="brief-h" style="max-width:20ch;">Field notes on the threats families actually face.</h2>
+
+      <div class="article-grid">
+        <article>
+          <div class="art-fig"><span class="mono">FIG · voiceprint waveform</span></div>
+          <div class="art-body">
+            <div class="art-cat mono">DEEPFAKE FRAUD · 6 MIN</div>
+            <h3>The voice on the phone was your grandson. It wasn't.</h3>
+            <p>How three seconds of public audio becomes a convincing emergency call — and the one free habit that defeats it.</p>
+          </div>
+        </article>
+        <article>
+          <div class="art-fig"><span class="mono">FIG · credit-file timeline</span></div>
+          <div class="art-body">
+            <div class="art-cat mono">IDENTITY THEFT · 5 MIN</div>
+            <h3>Why your first data breach happens before you turn 18.</h3>
+            <p>Synthetic identity fraud quietly farms minors' credit for years. Here's how to find it and freeze it now.</p>
+          </div>
+        </article>
+        <article>
+          <div class="art-fig"><span class="mono">FIG · reuse attack graph</span></div>
+          <div class="art-body">
+            <div class="art-cat mono">ACCOUNT TAKEOVER · 7 MIN</div>
+            <h3>Password reuse is a solved problem. Here's why 81% still do it.</h3>
+            <p>The fix takes an afternoon and is mostly free. We walk the exact setup, in priority order, with no upsell.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section data-section="about">
+    <div class="inner">
+      <div class="eyebrow mono">About &amp; methodology</div>
+      <h2 class="brief-h" style="max-width:20ch;">I built this because it happened to people I love.</h2>
+      <p class="about-lede">I've watched more than one person close to me, family and friends both, fall victim to exactly the kind of scams described on this site. I've spent 25 years in digital marketing and search, most recently leading search and AI-powered media for McAfee, one of the largest names in consumer cybersecurity, and it still happened to people I care about. That's the moment this stopped being a business idea and became personal.</p>
+
+      <div class="section-block">
+        <div class="block-label mono">What I bring to this</div>
+        <p style="font-size:14.5px;line-height:1.65;color:var(--ink-mute);max-width:64ch;">Before McAfee, I built the search function at Intuit QuickBooks that contributed to the company's first billion-dollar revenue milestone, years spent deep in how financial platforms actually work, and how fraud tries to get around them. At McAfee, I saw firsthand how the identity-protection industry markets itself, what it gets right, and where it leans on fear instead of substance. That's the perspective DefendFam is built on.</p>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label mono">Why DefendFam exists</div>
+        <p style="font-size:14.5px;line-height:1.65;color:var(--ink-mute);max-width:64ch;">This site is how I give back what I know. Free guidance first, the cheapest or free fix listed before any paid one, and a paid recommendation only when it genuinely earns its place. DefendFam earns a commission on some of the tools linked here, disclosed plainly throughout, but the order things appear in is never for sale.</p>
+      </div>
+
+      <div class="section-block">
+        <div class="block-label mono">How this content is built</div>
+        <p style="font-size:14.5px;line-height:1.65;color:var(--ink-mute);max-width:64ch;">Every statistic on this site traces back to a primary source, agencies like the FTC, the FBI's Internet Crime Complaint Center, NCMEC, and research from organizations like Verizon and the FIDO Alliance, not secondhand blog posts repeating each other. Where a claim is attributed to a named expert, that person is real and quoted from published, linkable reporting, never invented. Content gets revisited as new data comes out.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px;">
+          <div style="width:20px;height:20px;border:2px solid var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;"><div style="width:6px;height:6px;background:var(--accent);border-radius:1px;"></div></div>
+          <span style="font-weight:700;font-size:15px;">DefendFam</span>
+        </div>
+        <p>Independent security guidance. We diagnose the threat first and recommend tools second.</p>
+      </div>
+      <div>
+        <div class="footer-label mono">Sources</div>
+        <div class="footer-sources">
+          <span>[1] FTC Protecting Older Consumers Report (Dec 2025) · Hiya deepfake-call survey</span>
+          <span>[2] FTC synthetic-identity tracking · industry CAGR · NCMEC sextortion data (2025)</span>
+          <span>[3] TAKE IT DOWN Act (2025) · NCMEC Take It Down</span>
+          <span>[4] Verizon 2025 Data Breach Investigations Report · FIDO Alliance 2025 survey</span>
+        </div>
+      </div>
+      <div class="footer-disclosure">
+        <div class="footer-label mono">Disclosure</div>
+        <p>DefendFam earns affiliate commission on some recommended tools. It never changes our diagnosis — free fixes are listed first wherever they exist.</p>
+      </div>
+    </div>
+    <div class="copyright">© 2026 DefendFam · Educational content, not legal or financial advice.</div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var links = document.querySelectorAll('[data-goto]');
+    function go(name) {
+      document.querySelectorAll('section[data-section]').forEach(function (s) {
+        s.classList.toggle('active', s.getAttribute('data-section') === name);
+      });
+      document.querySelectorAll('.nav-link').forEach(function (l) {
+        l.classList.toggle('active', l.getAttribute('data-goto') === name);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    links.forEach(function (el) {
+      el.addEventListener('click', function () { go(el.getAttribute('data-goto')); });
+    });
+    go('home');
+  })();
+</script>
+
+</body>
+</html>
