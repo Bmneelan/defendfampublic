@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,9 +44,9 @@
   .brand-mark { width: 22px; height: 22px; border: 2px solid var(--accent); border-radius: 5px; display: flex; align-items: center; justify-content: center; }
   .brand-mark span { width: 7px; height: 7px; background: var(--accent); border-radius: 1px; display: block; }
   .brand-name { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
-  .nav-items { display: flex; align-items: center; gap: clamp(4px,1.6vw,8px); flex-wrap: wrap; }
+  .nav-items { display: flex; align-items: center; gap: clamp(2px,1vw,6px); flex-wrap: wrap; }
   .nav-link {
-    font-size: 14px; font-weight: 500; color: var(--ink-soft); padding: 7px 11px; border-radius: 8px;
+    font-size: 13.5px; font-weight: 500; color: var(--ink-soft); padding: 7px 10px; border-radius: 8px;
     cursor: pointer; text-decoration: none; white-space: nowrap; background: transparent;
     transition: color .15s, background .15s; border: none; font-family: inherit;
   }
@@ -59,6 +58,7 @@
   h1 { font-size: clamp(40px,8.5vw,76px); line-height: 0.96; font-weight: 800; letter-spacing: -0.04em; margin: 0; max-width: 13ch; }
   .lede { font-size: clamp(16px,2.2vw,21px); line-height: 1.5; color: var(--ink-mute); max-width: 52ch; margin: 22px 0 0; }
   .grid-3 { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 16px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 16px; }
   .card {
     background: var(--cream-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px;
     cursor: pointer; transition: transform .15s, box-shadow .15s, border-color .15s; display: flex; flex-direction: column;
@@ -118,6 +118,8 @@
   .priority-stack { display: flex; flex-direction: column; gap: 12px; }
   .cta-btn { display: inline-flex; align-items: center; gap: 9px; background: var(--accent); color: #fdfaf3; padding: 15px 24px; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; cursor: pointer; border: none; font-family: inherit; margin-top: 26px; }
   .cta-btn:hover { filter: brightness(0.92); }
+  .cta-btn.ghost { background: transparent; border: 1px solid var(--border); color: var(--ink); }
+  .cta-btn.ghost:hover { filter: none; border-color: #c9bea6; }
   .donut-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; }
   .donut { width: 148px; height: 148px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
   .donut-inner { width: 104px; height: 104px; border-radius: 50%; background: var(--cream-card); display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -155,10 +157,11 @@
   .vendor-card h4 { font-weight: 700; font-size: 16px; margin: 0 0 6px; }
   .vendor-card p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink-mute); }
   .about-lede { font-size: clamp(17px,2.4vw,22px); line-height: 1.5; color: var(--ink-soft); max-width: 58ch; margin: 22px 0 40px; font-weight: 500; }
+  .note-box { background: #eef3fa; border: 1px solid #d7e4f1; border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
 </style>
 </head>
 <body>
-
+ 
 <nav>
   <div class="nav-inner">
     <div class="brand" data-goto="home">
@@ -167,17 +170,19 @@
     </div>
     <div class="nav-items">
       <button class="nav-link" data-goto="home">Home</button>
-      <button class="nav-link" data-goto="elder">Elders</button>
-      <button class="nav-link" data-goto="teen">Teens</button>
-      <button class="nav-link" data-goto="finance">Finance</button>
-      <button class="nav-link" data-goto="blog">Briefings</button>
+      <button class="nav-link" data-goto="teens">Teens</button>
+      <button class="nav-link" data-goto="adults">Adults</button>
+      <button class="nav-link" data-goto="elders">Elders</button>
+      <button class="nav-link" data-goto="family">Family</button>
+      <button class="nav-link" data-goto="business">Business</button>
+      <button class="nav-link" data-goto="resources">Resources</button>
       <button class="nav-link" data-goto="about">About</button>
     </div>
   </div>
 </nav>
-
+ 
 <main>
-
+ 
   <!-- HOME -->
   <section data-section="home" class="active">
     <div class="inner" style="padding-bottom:22px;">
@@ -185,66 +190,62 @@
       <h1>Is the threat real?</h1>
       <p class="lede">Most identity-protection subscriptions defend you from threats you'll never face. Find out exactly where you're exposed — before you sign another one.</p>
     </div>
-
+ 
     <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap;">
-      <span class="mono" style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--label);white-space:nowrap;">Start here — pick your exposure</span>
+      <span class="mono" style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--label);white-space:nowrap;">Start with who you're protecting</span>
       <span style="flex:1;min-width:40px;height:1px;background:var(--border);"></span>
       <a href="#why" class="mono" style="font-size:12px;color:var(--accent);text-decoration:none;white-space:nowrap;">How we stay honest →</a>
     </div>
-
-    <div class="grid-3" style="padding-bottom:clamp(40px,5vw,56px);">
-      <button class="card" data-goto="elder">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="var(--accent)"/></svg></div>
-        <div class="risk-label mono">Risk 01</div>
-        <h3>Elders &amp; deepfake fraud</h3>
-        <p>AI-cloned voices impersonate family in crisis. The fastest-growing fraud aimed at people over 60.</p>
-        <div class="card-foot">
-          <div class="stat-row"><span class="stat-big mono">$1.6B</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
-          <span class="cta-link">Assess elder exposure <span class="mono">→</span></span>
-        </div>
-      </button>
-      <button class="card" data-goto="teen">
+ 
+    <div class="grid-3" style="padding-bottom:16px;">
+      <button class="card" data-goto="teens">
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7"><rect x="5" y="5" width="14" height="14" rx="2" transform="rotate(45 12 12)"/></svg></div>
-        <div class="risk-label mono">Risk 02</div>
-        <h3>Teens &amp; identity theft</h3>
-        <p>A clean credit file and an oversharing habit make young adults the highest-yield target for synthetic fraud.</p>
+        <div class="risk-label mono">For kids &amp; teens</div>
+        <h3>Growing up online, growing up targeted</h3>
+        <p>From "free Robux" scams to AI-generated images, the platforms kids and teens already use are where the exposure is highest.</p>
         <div class="card-foot">
           <div class="stat-row"><span class="stat-big mono">42% CAGR</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
-          <span class="cta-link">Assess teen exposure <span class="mono">→</span></span>
+          <span class="cta-link">Guidance for teens &amp; kids <span class="mono">→</span></span>
         </div>
       </button>
-      <button class="card" data-goto="finance">
+      <button class="card" data-goto="adults">
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7"><rect x="4" y="7" width="12" height="12" rx="2"/><rect x="8" y="3" width="12" height="12" rx="2"/></svg></div>
-        <div class="risk-label mono">Risk 03</div>
-        <h3>Financial account takeover</h3>
-        <p>One reused password is the door to every account you own. The mechanics are simple — and preventable.</p>
+        <div class="risk-label mono">For adults</div>
+        <h3>One reused password is the door to everything</h3>
+        <p>Credential stuffing, phishing, and account takeover run on the same mechanic. The fix is simpler than the subscription.</p>
         <div class="card-foot">
-          <div class="stat-row"><span class="stat-big mono">81%</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
-          <span class="cta-link">Run account security audit <span class="mono">→</span></span>
+          <div class="stat-row"><span class="stat-big mono">88%</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
+          <span class="cta-link">Guidance for adults <span class="mono">→</span></span>
+        </div>
+      </button>
+      <button class="card" data-goto="elders">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="var(--accent)"/></svg></div>
+        <div class="risk-label mono">For elders</div>
+        <h3>The voice asking for money sounds exactly like family</h3>
+        <p>AI-cloned voices impersonate family in crisis. It's the fastest-growing fraud aimed at people over 60.</p>
+        <div class="card-foot">
+          <div class="stat-row"><span class="stat-big mono">$2.4B</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
+          <span class="cta-link">Guidance for elders <span class="mono">→</span></span>
         </div>
       </button>
     </div>
-
+ 
     <div class="section-block" style="margin-top:0;">
-      <div class="block-label mono">One thing before you dig in</div>
-      <div class="fork-box">
-        <button class="fork-card" data-goto="elder">
-          <div class="flabel mono">I'm here for</div>
-          <h4>My family</h4>
-          <p>Guidance for parents and adult children protecting the people closest to them. That's everything below.</p>
+      <div class="block-label mono">If you're the one watching out for more than one person</div>
+      <div class="fork-box" style="margin-top:0;">
+        <button class="fork-card" data-goto="family">
+          <div class="flabel mono">Sandwich generation</div>
+          <h4>Protecting a family, not just yourself</h4>
+          <p>If you're watching a teenager's accounts and a parent's finances at the same time, start here instead of picking one page.</p>
         </button>
-        <div class="fork-card" style="cursor:default;">
-          <div class="flabel mono">Coming later</div>
-          <h4>My business</h4>
-          <p>The same underlying threats, credential stuffing, account takeover, social engineering, apply directly to small businesses too. A dedicated track is planned.</p>
-        </div>
+        <button class="fork-card" data-goto="business">
+          <div class="flabel mono">Beyond the household</div>
+          <h4>Running a small business</h4>
+          <p>The same mechanics, credential stuffing, social engineering, account takeover, hit businesses too. See what carries over.</p>
+        </button>
       </div>
-
-      <div class="block-label mono">Who is being targeted</div>
-      <p style="font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:62ch;margin:0 0 16px;">Cyber risk touches everyone, but the instinct to recognize a scam in progress isn't the same at every age. A 25-year-old and an 85-year-old don't carry the same built-in defenses, the same skepticism, or the same digital fluency. We looked at where cyber criminals concentrate their effort and identified the three groups facing the highest, most distinct exposure.</p>
-      <p style="font-size:15px;line-height:1.65;color:var(--ink-soft);max-width:62ch;margin:0 0 40px;">We'll help anyone who comes to this site, but these three are where we start, because they're where the real damage is happening: elders, whose trust in a familiar voice is being weaponized by cloned audio; teens, whose unmonitored credit files quietly become someone else's raw material; and everyday account holders, whose reused passwords are the single most common door criminals walk through.</p>
     </div>
-
+ 
     <div id="why" class="why-box">
       <div class="why-grid">
         <div>
@@ -262,93 +263,20 @@
       </div>
     </div>
   </section>
-
-  <!-- ELDER -->
-  <section data-section="elder">
+ 
+  <!-- TEENS (incl. kids) -->
+  <section data-section="teens">
     <div class="inner">
-      <div class="eyebrow mono">Threat brief 01 — Deepfake fraud</div>
-      <h2 class="brief-h">The voice asking for money sounds exactly like family.</h2>
-
+      <div class="eyebrow mono">For kids &amp; teens</div>
+      <h2 class="brief-h">A clean credit file is the most valuable thing a kid owns. It isn't the only thing being targeted.</h2>
+ 
       <div class="quick-answer">
         <div class="qa-label mono">Quick answer</div>
-        <p>Is a family safe word enough to stop an AI voice-cloning scam? Not by itself. It stops a scammer who doesn't know the word, but a determined one can talk around it or fake enough distress to avoid answering, which is why calling back on a number you already had saved matters just as much. Full breakdown below.</p>
+        <p>What are kids and teens actually targeted for? Four distinct things: synthetic identity fraud on an unmonitored credit file, everyday scams inside the apps and games they already use, financial sextortion, and AI-generated fake explicit images. Each needs a different response, covered below.</p>
       </div>
-
-      <div class="stat-grid">
-        <div class="stat-block">
-          <div class="stat-num">$2.4B</div>
-          <div class="stat-desc">Total fraud losses reported by adults 60+ in 2024, per the FTC's December 2025 report — roughly four times the $600M reported in 2020. The FTC's own estimate of the true cost, accounting for underreporting, runs as high as $81.5B.</div>
-          <div class="stat-source mono"><span>◆</span> Source verified · FTC (Dec 2025) <span style="color:#857a68;">[1]</span></div>
-        </div>
-        <div class="panel">
-          <div style="font-size:13px;font-weight:600;color:var(--ink-mute);margin-bottom:4px;">Imposter-scam losses, indexed</div>
-          <div class="mono" style="font-size:11px;color:#a59a86;margin-bottom:22px;">2021 → 2025</div>
-          <div class="bars">
-            <div class="bar-col"><div class="bar" style="height:34%;background:#dbe6f2;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'21</span></div>
-            <div class="bar-col"><div class="bar" style="height:48%;background:#dbe6f2;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'22</span></div>
-            <div class="bar-col"><div class="bar" style="height:62%;background:#7fb0e0;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'23</span></div>
-            <div class="bar-col"><div class="bar" style="height:80%;background:#3a7cc4;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'24</span></div>
-            <div class="bar-col"><div class="bar" style="height:100%;background:var(--accent);"></div><span class="mono" style="font-size:11px;color:var(--ink);font-weight:600;">'25</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-block">
-        <div class="block-label mono">Why elders are targeted</div>
-        <div class="why-targeted-grid">
-          <div class="mini-card"><h4>Trust in the voice</h4><p>A familiar voice short-circuits skepticism. Cloning needs only seconds of audio from social media.</p></div>
-          <div class="mini-card"><h4>Manufactured urgency</h4><p>"I'm in jail / in an accident — don't tell anyone." Panic is the exploit, not technology.</p></div>
-          <div class="mini-card"><h4>Untraceable payment</h4><p>Gift cards, wire transfers and crypto are requested precisely because they can't be reversed.</p></div>
-          <div class="mini-card"><h4>Isolation by design</h4><p>"Keep this between us" prevents the one thing that stops the scam — a second opinion.</p></div>
-        </div>
-      </div>
-
-      <div class="section-block">
-        <div class="guidance-label mono">The guidance</div>
-        <h3 class="guidance-h">Three moves, in order of impact</h3>
-        <div class="step-grid">
-          <div class="step-card"><div class="step-num mono">01</div><h4>Set a family safe-word</h4><p>Not absolute on its own — a determined scammer can talk around it. Pair it with rule two below.</p><span class="step-cost mono">COST: $0</span></div>
-          <div class="step-card"><div class="step-num mono">02</div><h4>Call back on a saved number</h4><p>Never the number that called you, that can be spoofed too. Use one you already had.</p><span class="step-cost mono">COST: $0</span></div>
-          <div class="step-card"><div class="step-num mono">03</div><h4>Identity monitoring</h4><p>Catches the downstream damage — new accounts, address changes — when a scam does land.</p><span class="step-cost mono">COST: PAID TOOL</span></div>
-        </div>
-        <button class="cta-btn" data-goto="blog">Run elder fraud check <span class="mono">→</span></button>
-      </div>
-
-      <div class="section-block">
-        <div class="guidance-label mono">Looking for immediate support?</div>
-        <h3 class="guidance-h">Some of this you can do yourself. Some works better with help.</h3>
-        <div class="block-label mono" style="margin-top:0;">Software you manage yourself</div>
-        <div class="support-grid" style="margin-bottom:28px;">
-          <div class="vendor-card"><div class="vkind mono">Family-shared monitoring</div><h4>Aura</h4><p>Plans let an adult child and a parent share one account across households, alerts visible to everyone on the plan.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Largest coverage</div><h4>LifeLock</h4><p>The most brand recognition of any option here, plus the largest identity-theft insurance and reimbursement coverage.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Built for caregiving</div><h4>EverSafe</h4><p>Senior-specific discount, shared family alerts, and monitoring that extends to investment and retirement accounts.</p></div>
-        </div>
-        <div class="block-label mono">Support with a person or institution behind it</div>
-        <div class="support-grid">
-          <div class="vendor-card"><div class="vkind mono">Free · live person</div><h4>AARP Fraud Watch Network</h4><p>1-877-908-3360. Free, not limited to AARP members, and staffed by someone trained specifically for this.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Spending controls</div><h4>True Link Financial</h4><p>A prepaid card with spending limits and category restrictions a family member controls directly.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Free · through your bank</div><h4>Caregiver Banking</h4><p>Huntington, Wells Fargo, and KeyBank now offer view-only or spending-limited access for a trusted family member.</p></div>
-        </div>
-      </div>
-
-      <div class="section-block">
-        <div class="guidance-label mono">If money has already been sent</div>
-        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;">Speed matters more than which form gets filed first. Wire transfer: call Western Union's fraud hotline (800-448-1492) or MoneyGram (1-800-926-9400) immediately, a narrow reversal window sometimes exists. Gift card: call the number on the back of the card before the balance is drained. Then file with the FTC at reportfraud.ftc.gov and, for cross-border cases, the FBI's IC3 at ic3.gov.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TEEN -->
-  <section data-section="teen">
-    <div class="inner">
-      <div class="eyebrow mono">Threat brief 02 — Identity theft &amp; more</div>
-      <h2 class="brief-h">A clean credit file is the most valuable thing a teenager owns. It isn't the only thing being targeted.</h2>
-
-      <div class="quick-answer">
-        <div class="qa-label mono">Quick answer</div>
-        <p>What are teens actually targeted for? Four distinct things: synthetic identity fraud on an unmonitored credit file, everyday scams inside the apps and games teens already use, financial sextortion, and AI-generated fake explicit images. Each needs a different response, covered below.</p>
-      </div>
-
+ 
+      <div class="note-box" style="margin-bottom:8px;">A lot of the reporting behind these numbers is written about teenagers specifically, but the platforms involved, Roblox, Discord, Instagram, are used by much younger kids too. The same freeze-the-file, use-a-password-manager, talk-before-it-happens guidance applies earlier than most parents assume.</div>
+ 
       <div class="stat-grid">
         <div class="stat-block">
           <div class="stat-num">42%</div>
@@ -369,7 +297,7 @@
           </div>
         </div>
       </div>
-
+ 
       <div class="section-block">
         <div class="block-label mono">Four threat vectors</div>
         <div class="vector-grid">
@@ -379,46 +307,45 @@
           <div class="vector-card"><div class="vlabel mono">VECTOR 04</div><h4>Synthetic identity</h4><p>A real SSN fused with a fake name builds credit for years before anyone notices.</p></div>
         </div>
       </div>
-
+ 
       <div class="section-block">
         <div class="guidance-label mono">The guidance</div>
         <h3 class="guidance-h">Three moves, in order of impact</h3>
         <div class="step-grid">
-          <div class="step-card"><div class="step-num mono">01</div><h4>Freeze the credit file</h4><p>Free at all three bureaus. A frozen file can't be used to open accounts — the single highest-impact move.</p><span class="step-cost mono">COST: $0</span></div>
+          <div class="step-card"><div class="step-num mono">01</div><h4>Freeze the credit file</h4><p>Free at all three bureaus. A frozen file can't be used to open accounts — the single highest-impact move, and it works the moment a child has an SSN, not just at 18.</p><span class="step-cost mono">COST: $0</span></div>
           <div class="step-card"><div class="step-num mono">02</div><h4>Password manager + unique logins</h4><p>Breaks credential reuse so one leak stays contained to one account.</p><span class="step-cost mono">COST: LOW / FREE TIER</span></div>
           <div class="step-card"><div class="step-num mono">03</div><h4>Data-broker removal</h4><p>Shrinks the public profile fraudsters build from. Doable manually, or via a removal service.</p><span class="step-cost mono">COST: TIME OR PAID TOOL</span></div>
         </div>
       </div>
-
+ 
       <div class="section-block">
-        <div class="block-label mono">The everyday scams teens actually run into</div>
-        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;margin-bottom:16px;">This is where parent-and-teen credibility gets built or lost. A warning about identity theft can feel abstract to a teen who's never seen it happen — a warning about the exact Robux scam a friend fell for last week lands immediately.</p>
+        <div class="block-label mono">The everyday scams kids and teens actually run into</div>
+        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;margin-bottom:16px;">This is where parent credibility gets built or lost. A warning about identity theft can feel abstract to a kid who's never seen it happen — a warning about the exact Robux scam a friend fell for last week lands immediately, at almost any age.</p>
         <div class="why-targeted-grid">
-          <div class="mini-card"><h4>"Free Robux" apps</h4><p>Suspected gaming fraud rose 53% year-over-year in 2026; Roblox alone saw ~1.65M attempted attacks. Spin-wheel apps keep teens one step from a payout that never comes.</p></div>
+          <div class="mini-card"><h4>"Free Robux" apps</h4><p>Suspected gaming fraud rose 53% year-over-year in 2026; Roblox alone saw ~1.65M attempted attacks. Spin-wheel apps keep players one step from a payout that never comes.</p></div>
           <div class="mini-card"><h4>Discord escalation</h4><p>Roblox chat is filtered; Discord isn't. Predatory adults move conversations there, building rapport over days before asking for credentials or money.</p></div>
           <div class="mini-card"><h4>Fake Instagram brand deals</h4><p>A DM collaboration offer that leads to a phishing link or a "contract" asking for payment or login credentials before anything official happens.</p></div>
         </div>
       </div>
-
+ 
       <div class="section-block">
         <div class="block-label mono">Financial sextortion — one of the fastest-growing threats to teens</div>
         <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;">NCMEC received more than 50,000 reports of financially motivated sextortion in 2025, an average of 137 a day, up from 36,000 the year before. The pattern: a stranger poses as a peer, moves the conversation to a private app, then extorts payment after getting an image. Reports skew heavily toward boys 14–17. The most important thing to say in advance: paying does not make it stop, and if it's already happened, the teen is not in trouble and not to blame.</p>
       </div>
-
+ 
       <div class="section-block">
         <div class="block-label mono">AI-generated images: the "nudify" problem</div>
         <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;">No real image is required — "nudify" apps generate a fake explicit image from an ordinary, already-public photo. The federal TAKE IT DOWN Act (May 2025) requires covered platforms to remove a valid report within 48 hours. NCMEC's free Take It Down service (takeitdown.ncmec.org) fingerprints the image so platforms can detect and remove it without it ever being uploaded anywhere — the same response whether the image is real or AI-generated.</p>
-        <button class="cta-btn" data-goto="blog">Assess teen exposure <span class="mono">→</span></button>
       </div>
-
+ 
       <div class="section-block">
         <div class="guidance-label mono">Looking for immediate support?</div>
-        <h3 class="guidance-h">This one spreads across more ground than the elder page.</h3>
+        <h3 class="guidance-h">This one spreads across more ground than a single checklist.</h3>
         <div class="block-label mono" style="margin-top:0;">Software you manage yourself</div>
         <div class="support-grid" style="margin-bottom:28px;">
           <div class="vendor-card"><div class="vkind mono">Identity + gaming safety</div><h4>Aura</h4><p>Standard identity monitoring plus parental controls covering ~200 games and platforms including Discord, built to catch grooming and harassment.</p></div>
           <div class="vendor-card"><div class="vkind mono">Behavioral monitoring</div><h4>Bark</h4><p>Monitors texts, social media, and gaming chat for predatory contact, bullying, and self-harm risk signals — alerts sent directly to a parent.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Credit + identity</div><h4>LifeLock</h4><p>Same brand recognition and insurance coverage as the elder page, with family plans covering a teen's still-blank credit file.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Credit + identity</div><h4>LifeLock</h4><p>Same brand recognition and insurance coverage as elder-focused plans, with family plans covering a still-blank credit file.</p></div>
         </div>
         <div class="block-label mono">Support with a person or institution behind it</div>
         <div class="support-grid">
@@ -429,18 +356,18 @@
       </div>
     </div>
   </section>
-
-  <!-- FINANCE -->
-  <section data-section="finance">
+ 
+  <!-- ADULTS (formerly Finance) -->
+  <section data-section="adults">
     <div class="inner">
-      <div class="eyebrow mono">Threat brief 03 — Account takeover</div>
+      <div class="eyebrow mono">For adults</div>
       <h2 class="brief-h">One reused password is the door to every account you own.</h2>
-
+ 
       <div class="quick-answer">
         <div class="qa-label mono">Quick answer</div>
         <p>Is a password manager still enough in 2026? Mostly, but it's no longer the strongest option. A unique password per site stops the most common attack outright. The stronger fix, where offered, is a passkey, which removes the reusable password entirely rather than just managing it better.</p>
       </div>
-
+ 
       <div class="stat-grid">
         <div class="stat-block">
           <div class="stat-num">22%</div>
@@ -454,7 +381,7 @@
           <div style="font-size:13.5px;color:var(--ink-mute);line-height:1.5;max-width:30ch;">of attacks on basic web applications involve stolen or reused credentials. <span class="mono" style="font-size:11px;color:var(--label);">— Verizon 2025 DBIR [4]</span></div>
         </div>
       </div>
-
+ 
       <div class="two-col">
         <div class="mini-card" style="padding:28px;border-radius:16px;">
           <div class="block-label mono" style="margin-bottom:12px;">The core mechanic</div>
@@ -467,14 +394,14 @@
           <p>Banks increasingly verify big transfers with video selfies. Synthetic-video tooling now defeats some liveness checks, turning "see my face" into a forgeable credential. MFA that isn't tied to a device is the weak point.</p>
         </div>
       </div>
-
+ 
       <div class="section-block">
         <div class="block-label mono">The stronger option — passkeys</div>
         <div class="mini-card" style="padding:24px;">
           <p style="margin:0;">A passkey does away with the shared secret entirely rather than protecting it better — nothing stored that a breach can leak, nothing to type that a fake login page can capture. It resists both credential stuffing and phishing in a way password-plus-MFA setups aren't quite. Support is still uneven across sites, so a password manager remains the right fallback everywhere passkeys aren't offered yet.</p>
         </div>
       </div>
-
+ 
       <div class="section-block">
         <div class="guidance-label mono">The guidance</div>
         <h3 class="guidance-h">Three priorities, do them in this order</h3>
@@ -483,9 +410,8 @@
           <div class="priority-row"><div class="priority-num mono">P2</div><div><h4>Device-bound MFA</h4><p>For accounts that don't yet support passkeys. An authenticator app or hardware key resists deepfake and SIM-swap attacks.</p></div></div>
           <div class="priority-row"><div class="priority-num mono">P3</div><div><h4>Breach monitoring</h4><p>The safety net that catches a leaked credential before bots get there, not the wall itself.</p></div></div>
         </div>
-        <button class="cta-btn" data-goto="blog">Run account security audit <span class="mono">→</span></button>
       </div>
-
+ 
       <div class="section-block">
         <div class="guidance-label mono">Looking for immediate support?</div>
         <h3 class="guidance-h">This one's about prevention more than recovery.</h3>
@@ -504,13 +430,165 @@
       </div>
     </div>
   </section>
-
-  <!-- BLOG -->
-  <section data-section="blog">
+ 
+  <!-- ELDERS -->
+  <section data-section="elders">
     <div class="inner">
-      <div class="eyebrow mono">Threat briefings</div>
-      <h2 class="brief-h" style="max-width:20ch;">Field notes on the threats families actually face.</h2>
-
+      <div class="eyebrow mono">For elders</div>
+      <h2 class="brief-h">The voice asking for money sounds exactly like family.</h2>
+ 
+      <div class="quick-answer">
+        <div class="qa-label mono">Quick answer</div>
+        <p>Is a family safe word enough to stop an AI voice-cloning scam? Not by itself. It stops a scammer who doesn't know the word, but a determined one can talk around it or fake enough distress to avoid answering, which is why calling back on a number you already had saved matters just as much. Full breakdown below.</p>
+      </div>
+ 
+      <div class="stat-grid">
+        <div class="stat-block">
+          <div class="stat-num">$2.4B</div>
+          <div class="stat-desc">Total fraud losses reported by adults 60+ in 2024, per the FTC's December 2025 report — roughly four times the $600M reported in 2020. The FTC's own estimate of the true cost, accounting for underreporting, runs as high as $81.5B.</div>
+          <div class="stat-source mono"><span>◆</span> Source verified · FTC (Dec 2025) <span style="color:#857a68;">[1]</span></div>
+        </div>
+        <div class="panel">
+          <div style="font-size:13px;font-weight:600;color:var(--ink-mute);margin-bottom:4px;">Imposter-scam losses, indexed</div>
+          <div class="mono" style="font-size:11px;color:#a59a86;margin-bottom:22px;">2021 → 2025</div>
+          <div class="bars">
+            <div class="bar-col"><div class="bar" style="height:34%;background:#dbe6f2;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'21</span></div>
+            <div class="bar-col"><div class="bar" style="height:48%;background:#dbe6f2;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'22</span></div>
+            <div class="bar-col"><div class="bar" style="height:62%;background:#7fb0e0;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'23</span></div>
+            <div class="bar-col"><div class="bar" style="height:80%;background:#3a7cc4;"></div><span class="mono" style="font-size:11px;color:#a59a86;">'24</span></div>
+            <div class="bar-col"><div class="bar" style="height:100%;background:var(--accent);"></div><span class="mono" style="font-size:11px;color:var(--ink);font-weight:600;">'25</span></div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="section-block">
+        <div class="block-label mono">Why elders are targeted</div>
+        <div class="why-targeted-grid">
+          <div class="mini-card"><h4>Trust in the voice</h4><p>A familiar voice short-circuits skepticism. Cloning needs only seconds of audio from social media.</p></div>
+          <div class="mini-card"><h4>Manufactured urgency</h4><p>"I'm in jail / in an accident — don't tell anyone." Panic is the exploit, not technology.</p></div>
+          <div class="mini-card"><h4>Untraceable payment</h4><p>Gift cards, wire transfers and crypto are requested precisely because they can't be reversed.</p></div>
+          <div class="mini-card"><h4>Isolation by design</h4><p>"Keep this between us" prevents the one thing that stops the scam — a second opinion.</p></div>
+        </div>
+      </div>
+ 
+      <div class="section-block">
+        <div class="guidance-label mono">The guidance</div>
+        <h3 class="guidance-h">Three moves, in order of impact</h3>
+        <div class="step-grid">
+          <div class="step-card"><div class="step-num mono">01</div><h4>Set a family safe-word</h4><p>Not absolute on its own — a determined scammer can talk around it. Pair it with rule two below.</p><span class="step-cost mono">COST: $0</span></div>
+          <div class="step-card"><div class="step-num mono">02</div><h4>Call back on a saved number</h4><p>Never the number that called you, that can be spoofed too. Use one you already had.</p><span class="step-cost mono">COST: $0</span></div>
+          <div class="step-card"><div class="step-num mono">03</div><h4>Identity monitoring</h4><p>Catches the downstream damage — new accounts, address changes — when a scam does land.</p><span class="step-cost mono">COST: PAID TOOL</span></div>
+        </div>
+      </div>
+ 
+      <div class="section-block">
+        <div class="guidance-label mono">Looking for immediate support?</div>
+        <h3 class="guidance-h">Some of this you can do yourself. Some works better with help.</h3>
+        <div class="block-label mono" style="margin-top:0;">Software you manage yourself</div>
+        <div class="support-grid" style="margin-bottom:28px;">
+          <div class="vendor-card"><div class="vkind mono">Family-shared monitoring</div><h4>Aura</h4><p>Plans let an adult child and a parent share one account across households, alerts visible to everyone on the plan.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Largest coverage</div><h4>LifeLock</h4><p>The most brand recognition of any option here, plus the largest identity-theft insurance and reimbursement coverage.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Built for caregiving</div><h4>EverSafe</h4><p>Senior-specific discount, shared family alerts, and monitoring that extends to investment and retirement accounts.</p></div>
+        </div>
+        <div class="block-label mono">Support with a person or institution behind it</div>
+        <div class="support-grid">
+          <div class="vendor-card"><div class="vkind mono">Free · live person</div><h4>AARP Fraud Watch Network</h4><p>1-877-908-3360. Free, not limited to AARP members, and staffed by someone trained specifically for this.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Spending controls</div><h4>True Link Financial</h4><p>A prepaid card with spending limits and category restrictions a family member controls directly.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Free · through your bank</div><h4>Caregiver Banking</h4><p>Huntington, Wells Fargo, and KeyBank now offer view-only or spending-limited access for a trusted family member.</p></div>
+        </div>
+      </div>
+ 
+      <div class="section-block">
+        <div class="guidance-label mono">If money has already been sent</div>
+        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;">Speed matters more than which form gets filed first. Wire transfer: call Western Union's fraud hotline (800-448-1492) or MoneyGram (1-800-926-9400) immediately, a narrow reversal window sometimes exists. Gift card: call the number on the back of the card before the balance is drained. Then file with the FTC at reportfraud.ftc.gov and, for cross-border cases, the FBI's IC3 at ic3.gov.</p>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- FAMILY -->
+  <section data-section="family">
+    <div class="inner">
+      <div class="eyebrow mono">For the sandwich generation</div>
+      <h2 class="brief-h">If you're watching out for more than one person, start here.</h2>
+ 
+      <div class="quick-answer">
+        <div class="qa-label mono">Quick answer</div>
+        <p>Where do I start if I'm managing this for my kids and my parents at the same time? The core moves are the same at every age, freeze the credit file, use a password manager, agree on a callback rule before there's an emergency, but who's most exposed right now usually decides the order. An unmonitored teen credit file and an aging parent's phone are both live risks; neither should wait for the other.</p>
+      </div>
+ 
+      <div class="section-block" style="margin-top:32px;">
+        <div class="block-label mono">Pick a starting point</div>
+        <div class="grid-3">
+          <button class="card" data-goto="teens">
+            <div class="risk-label mono">If you're protecting a kid or teen</div>
+            <h3 style="font-size:18px;">Freeze the file, set the ground rules</h3>
+            <p>Credit freezes, password managers, and the conversations that head off gaming scams and sextortion before they start.</p>
+            <span class="cta-link">Go to Teens <span class="mono">→</span></span>
+          </button>
+          <button class="card" data-goto="adults">
+            <div class="risk-label mono">If you're protecting yourself</div>
+            <h3 style="font-size:18px;">Close the credential-stuffing door</h3>
+            <p>The same account-takeover mechanic that hits everyone else hits the person managing the whole household too.</p>
+            <span class="cta-link">Go to Adults <span class="mono">→</span></span>
+          </button>
+          <button class="card" data-goto="elders">
+            <div class="risk-label mono">If you're protecting a parent</div>
+            <h3 style="font-size:18px;">Set the safe word before the call comes</h3>
+            <p>Deepfake voice scams and caregiving tools that give you visibility without taking over their accounts.</p>
+            <span class="cta-link">Go to Elders <span class="mono">→</span></span>
+          </button>
+        </div>
+      </div>
+ 
+      <div class="section-block">
+        <div class="block-label mono">What actually carries across generations</div>
+        <div class="why-targeted-grid">
+          <div class="mini-card"><h4>One password manager, several vaults</h4><p>A shared family plan (1Password, Bitwarden) lets everyone get unique logins without you managing each person's separately.</p></div>
+          <div class="mini-card"><h4>The same callback rule</h4><p>"Hang up and call back on a saved number" defeats spoofed calls whether the target is a teenager or a grandparent.</p></div>
+          <div class="mini-card"><h4>Caregiver-visible banking</h4><p>True Link and bank-offered caregiver access give a family member view-only or spending-limited visibility without full account control, useful for a parent or an older teen alike.</p></div>
+        </div>
+      </div>
+ 
+      <div class="section-block">
+        <div class="note-box">
+          There's no single "family" checklist on this site by design. The mechanics of a Roblox scam and a cloned-voice scam are different enough that combining them into one page would blur both. Use the three cards above to route to the guidance that actually matches who you're worried about right now.
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- BUSINESS -->
+  <section data-section="business">
+    <div class="inner">
+      <div class="eyebrow mono">For small business</div>
+      <h2 class="brief-h">The same threats, aimed at your business instead of your household.</h2>
+ 
+      <p class="lede" style="margin-top:22px;">Credential stuffing, social engineering, and account takeover don't stop at the front door. A small business runs the identical mechanics as a household, one reused password, one convincing phone call, with higher stakes per incident and fewer people watching for it.</p>
+ 
+      <div class="section-block">
+        <div class="block-label mono">What carries over directly</div>
+        <div class="why-targeted-grid">
+          <div class="mini-card"><h4>Credential stuffing</h4><p>The exact mechanic covered on the Adults page, applied to a business email or admin login instead of a personal account.</p></div>
+          <div class="mini-card"><h4>Social engineering</h4><p>The manufactured-urgency playbook that targets elders shows up as vendor-impersonation and invoice fraud in a business inbox.</p></div>
+          <div class="mini-card"><h4>Deepfake voice &amp; video</h4><p>The same cloning technology behind family-emergency scams is already being used to impersonate executives authorizing wire transfers.</p></div>
+        </div>
+      </div>
+ 
+      <div class="section-block">
+        <div class="note-box">
+          A dedicated business track, covering the parts that don't carry over (endpoint security, vendor risk, employee training) is in development. If that's what you're here for, the household guidance above is a reasonable starting point today, and a fuller track is coming.
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- RESOURCES -->
+  <section data-section="resources">
+    <div class="inner">
+      <div class="eyebrow mono">Resources</div>
+      <h2 class="brief-h" style="max-width:20ch;">Field notes, source data, and tools as we build them.</h2>
+      <p class="lede" style="margin-top:18px;">Everything here traces back to a primary source, not a secondhand summary of one. Interactive tools, starting with a guided exposure assessment, are in active development and will live here as they ship.</p>
+ 
       <div class="article-grid">
         <article>
           <div class="art-fig"><span class="mono">FIG · voiceprint waveform</span></div>
@@ -539,33 +617,33 @@
       </div>
     </div>
   </section>
-
+ 
   <!-- ABOUT -->
   <section data-section="about">
     <div class="inner">
       <div class="eyebrow mono">About &amp; methodology</div>
       <h2 class="brief-h" style="max-width:20ch;">I built this because it happened to people I love.</h2>
       <p class="about-lede">I've watched more than one person close to me, family and friends both, fall victim to exactly the kind of scams described on this site. I've spent 25 years in digital marketing and search, most recently leading search and AI-powered media for McAfee, one of the largest names in consumer cybersecurity, and it still happened to people I care about. That's the moment this stopped being a business idea and became personal.</p>
-
+ 
       <div class="section-block">
         <div class="block-label mono">What I bring to this</div>
         <p style="font-size:14.5px;line-height:1.65;color:var(--ink-mute);max-width:64ch;">Before McAfee, I built the search function at Intuit QuickBooks that contributed to the company's first billion-dollar revenue milestone, years spent deep in how financial platforms actually work, and how fraud tries to get around them. At McAfee, I saw firsthand how the identity-protection industry markets itself, what it gets right, and where it leans on fear instead of substance. That's the perspective DefendFam is built on.</p>
       </div>
-
+ 
       <div class="section-block">
         <div class="block-label mono">Why DefendFam exists</div>
         <p style="font-size:14.5px;line-height:1.65;color:var(--ink-mute);max-width:64ch;">This site is how I give back what I know. Free guidance first, the cheapest or free fix listed before any paid one, and a paid recommendation only when it genuinely earns its place. DefendFam earns a commission on some of the tools linked here, disclosed plainly throughout, but the order things appear in is never for sale.</p>
       </div>
-
+ 
       <div class="section-block">
         <div class="block-label mono">How this content is built</div>
         <p style="font-size:14.5px;line-height:1.65;color:var(--ink-mute);max-width:64ch;">Every statistic on this site traces back to a primary source, agencies like the FTC, the FBI's Internet Crime Complaint Center, NCMEC, and research from organizations like Verizon and the FIDO Alliance, not secondhand blog posts repeating each other. Where a claim is attributed to a named expert, that person is real and quoted from published, linkable reporting, never invented. Content gets revisited as new data comes out.</p>
       </div>
     </div>
   </section>
-
+ 
 </main>
-
+ 
 <footer>
   <div class="footer-inner">
     <div class="footer-grid">
@@ -593,7 +671,7 @@
     <div class="copyright">© 2026 DefendFam · Educational content, not legal or financial advice.</div>
   </div>
 </footer>
-
+ 
 <script>
   (function () {
     var links = document.querySelectorAll('[data-goto]');
@@ -612,6 +690,6 @@
     go('home');
   })();
 </script>
-
+ 
 </body>
 </html>
