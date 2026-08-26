@@ -158,6 +158,18 @@
   .vendor-card p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink-mute); }
   .about-lede { font-size: clamp(17px,2.4vw,22px); line-height: 1.5; color: var(--ink-soft); max-width: 58ch; margin: 22px 0 40px; font-weight: 500; }
   .note-box { background: #eef3fa; border: 1px solid #d7e4f1; border-radius: 14px; padding: 22px 24px; font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+  .support-head { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 6px; }
+  .support-sub { font-size: 13.5px; line-height: 1.5; color: var(--ink-mute); margin: 0 0 14px; max-width: 60ch; }
+  .affiliate-tag { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--label); margin-top: 10px; }
+  .affiliate-tag a { color: var(--label); text-decoration: underline; }
+  .footer-legal { display: flex; flex-wrap: wrap; gap: 6px 10px; margin-bottom: 10px; }
+  .footer-legal a { color: #a59a86; text-decoration: underline; }
+  .footer-legal a:hover { color: var(--accent); }
+  .legal-meta { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: var(--label); margin: 14px 0 32px; }
+  .legal-list { margin: 0; padding-left: 20px; font-size: 14.5px; line-height: 1.65; color: var(--ink-mute); max-width: 70ch; }
+  .legal-list li { margin-bottom: 8px; }
+  .legal-p { font-size: 14.5px; line-height: 1.65; color: var(--ink-mute); max-width: 70ch; margin: 0 0 16px; }
+  .brand { text-decoration: none; color: inherit; }
 </style>
 </head>
 <body>
@@ -341,17 +353,19 @@
       <div class="section-block">
         <div class="guidance-label mono">Looking for immediate support?</div>
         <h3 class="guidance-h">This one spreads across more ground than a single checklist.</h3>
-        <div class="block-label mono" style="margin-top:0;">Software you manage yourself</div>
+        <div class="support-head" style="margin-top:0;">Start here. There's a real chance you're already done.</div>
+        <p class="support-sub">A credit freeze does the actual job, free, at all three bureaus. Check this before you pay for anything below.</p>
         <div class="support-grid" style="margin-bottom:28px;">
-          <div class="vendor-card"><div class="vkind mono">Identity + gaming safety</div><h4>Aura</h4><p>Standard identity monitoring plus parental controls covering ~200 games and platforms including Discord, built to catch grooming and harassment.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Behavioral monitoring</div><h4>Bark</h4><p>Monitors texts, social media, and gaming chat for predatory contact, bullying, and self-harm risk signals: alerts sent directly to a parent.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Credit + identity</div><h4>LifeLock</h4><p>Same brand recognition and insurance coverage as elder-focused plans, with family plans covering a still-blank credit file.</p></div>
-        </div>
-        <div class="block-label mono">Support with a person or institution behind it</div>
-        <div class="support-grid">
           <div class="vendor-card"><div class="vkind mono">Free · highest impact</div><h4>Credit freeze</h4><p>Free at all three bureaus, takes minutes, and closes the identity-theft exploit outright.</p></div>
           <div class="vendor-card"><div class="vkind mono">Free · built for this</div><h4>NCMEC Take It Down</h4><p>takeitdown.ncmec.org: the right anchor for anything image-related, sextortion or AI-generated.</p></div>
           <div class="vendor-card"><div class="vkind mono">Free · often faster</div><h4>The school</h4><p>If classmates or a shared platform are involved, the school can often act faster than any app or hotline.</p></div>
+        </div>
+        <div class="support-head">Seems like more than that?</div>
+        <p class="support-sub">They charge. But it's peace of mind.</p>
+        <div class="support-grid">
+          <div class="vendor-card"><div class="vkind mono">Identity + gaming safety</div><h4>Aura</h4><p>Standard identity monitoring plus parental controls covering ~200 games and platforms including Discord, built to catch grooming and harassment.</p><p class="affiliate-tag"><a href="affiliate-disclosure.html">Affiliate link.</a> We may earn a commission.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Behavioral monitoring</div><h4>Bark</h4><p>Monitors texts, social media, and gaming chat for predatory contact, bullying, and self-harm risk signals: alerts sent directly to a parent.</p><p class="affiliate-tag"><a href="affiliate-disclosure.html">Affiliate link.</a> We may earn a commission.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Credit + identity</div><h4>Norton/LifeLock</h4><p>Same brand recognition and insurance coverage as elder-focused plans, with family plans covering a still-blank credit file.</p><p class="affiliate-tag"><a href="affiliate-disclosure.html">Affiliate link.</a> We may earn a commission.</p></div>
         </div>
       </div>
     </div>
@@ -415,17 +429,20 @@
       <div class="section-block">
         <div class="guidance-label mono">Looking for immediate support?</div>
         <h3 class="guidance-h">This one's about prevention more than recovery.</h3>
-        <div class="block-label mono" style="margin-top:0;">Software you manage yourself</div>
+        <div class="support-head" style="margin-top:0;">Start here. There's a real chance you're already done.</div>
+        <p class="support-sub">A password manager does the actual job, free, with Bitwarden. Check this before you pay for anything below.</p>
         <div class="support-grid" style="margin-bottom:28px;">
           <div class="vendor-card"><div class="vkind mono">Free · full featured</div><h4>Bitwarden</h4><p>Core password manager, including passkey storage and sync, is genuinely free, not a limited trial.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Paid step-up</div><h4>1Password</h4><p>Shared vaults, built-in breach monitoring that flags a saved login the moment it leaks, mature passkey support.</p></div>
-          <div class="vendor-card"><div class="vkind mono">The ceiling</div><h4>YubiKey</h4><p>A physical key that makes phishing and credential stuffing structurally impossible. Worth it for email and banking.</p></div>
-        </div>
-        <div class="block-label mono">Support with a person or institution behind it</div>
-        <div class="support-grid">
           <div class="vendor-card"><div class="vkind mono">Free · industry standard</div><h4>Have I Been Pwned</h4><p>Check an email address against known breach data in seconds, the standard first move.</p></div>
           <div class="vendor-card"><div class="vkind mono">Free · already available</div><h4>Bank alerts</h4><p>Most banks offer free login and transaction alerts that go unused simply because they were never turned on.</p></div>
           <div class="vendor-card"><div class="vkind mono">Free · at all 3 bureaus</div><h4>Credit fraud alerts</h4><p>Lighter than a full freeze: adds a verification step before new credit can be opened in your name.</p></div>
+        </div>
+        <div class="support-head">Seems like more than that?</div>
+        <p class="support-sub">They charge. But it's peace of mind.</p>
+        <div class="support-grid">
+          <div class="vendor-card"><div class="vkind mono">Paid step-up</div><h4>1Password</h4><p>Shared vaults, built-in breach monitoring that flags a saved login the moment it leaks, mature passkey support.</p><p class="affiliate-tag"><a href="affiliate-disclosure.html">Affiliate link.</a> We may earn a commission.</p></div>
+          <div class="vendor-card"><div class="vkind mono">The ceiling</div><h4>YubiKey</h4><p>A physical key that makes phishing and credential stuffing structurally impossible. Worth it for email and banking.</p><p class="affiliate-tag"><a href="affiliate-disclosure.html">Affiliate link.</a> We may earn a commission.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Credit + identity</div><h4>Norton/LifeLock</h4><p>Credit and identity monitoring with insurance backing, if you want a watched safety net behind the password manager and MFA above.</p><p class="affiliate-tag"><a href="affiliate-disclosure.html">Affiliate link.</a> We may earn a commission.</p></div>
         </div>
       </div>
     </div>
@@ -483,18 +500,20 @@
  
       <div class="section-block">
         <div class="guidance-label mono">Looking for immediate support?</div>
-        <h3 class="guidance-h">Some of this you can do yourself. Some works better with help.</h3>
-        <div class="block-label mono" style="margin-top:0;">Software you manage yourself</div>
+        <h3 class="guidance-h">Some of this works better with help. Some you can do yourself.</h3>
+        <div class="support-head" style="margin-top:0;">Start here. There's a real chance you're already done.</div>
+        <p class="support-sub">Caregiver banking access does the actual job, free, through Huntington, Wells Fargo, or KeyBank. Check this before you pay for anything below.</p>
         <div class="support-grid" style="margin-bottom:28px;">
-          <div class="vendor-card"><div class="vkind mono">Family-shared monitoring</div><h4>Aura</h4><p>Plans let an adult child and a parent share one account across households, alerts visible to everyone on the plan.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Largest coverage</div><h4>LifeLock</h4><p>The most brand recognition of any option here, plus the largest identity-theft insurance and reimbursement coverage.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Built for caregiving</div><h4>EverSafe</h4><p>Senior-specific discount, shared family alerts, and monitoring that extends to investment and retirement accounts.</p></div>
-        </div>
-        <div class="block-label mono">Support with a person or institution behind it</div>
-        <div class="support-grid">
           <div class="vendor-card"><div class="vkind mono">Free · live person</div><h4>AARP Fraud Watch Network</h4><p>1-877-908-3360. Free, not limited to AARP members, and staffed by someone trained specifically for this.</p></div>
-          <div class="vendor-card"><div class="vkind mono">Spending controls</div><h4>True Link Financial</h4><p>A prepaid card with spending limits and category restrictions a family member controls directly.</p></div>
           <div class="vendor-card"><div class="vkind mono">Free · through your bank</div><h4>Caregiver Banking</h4><p>Huntington, Wells Fargo, and KeyBank now offer view-only or spending-limited access for a trusted family member.</p></div>
+        </div>
+        <div class="support-head">Seems like more than that?</div>
+        <p class="support-sub">They charge. But it's peace of mind.</p>
+        <div class="support-grid">
+          <div class="vendor-card"><div class="vkind mono">Family-shared monitoring</div><h4>Aura</h4><p>Plans let an adult child and a parent share one account across households, alerts visible to everyone on the plan.</p><p class="affiliate-tag"><a href="affiliate-disclosure.html">Affiliate link.</a> We may earn a commission.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Largest coverage</div><h4>Norton/LifeLock</h4><p>The most brand recognition of any option here, plus the largest identity-theft insurance and reimbursement coverage.</p><p class="affiliate-tag"><a href="affiliate-disclosure.html">Affiliate link.</a> We may earn a commission.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Built for caregiving</div><h4>EverSafe</h4><p>Senior-specific discount, shared family alerts, and monitoring that extends to investment and retirement accounts.</p><p class="affiliate-tag"><a href="affiliate-disclosure.html">Affiliate link.</a> We may earn a commission.</p></div>
+          <div class="vendor-card"><div class="vkind mono">Spending controls</div><h4>True Link Financial</h4><p>A prepaid card with spending limits and category restrictions a family member controls directly.</p></div>
         </div>
       </div>
  
@@ -668,7 +687,10 @@
         <p>DefendFam earns affiliate commission on some recommended tools. It never changes our diagnosis: free fixes are listed first wherever they exist.</p>
       </div>
     </div>
-    <div class="copyright">© 2026 DefendFam · Educational content, not legal or financial advice.</div>
+    <div class="copyright">
+      <div class="footer-legal"><a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a> · <a href="affiliate-disclosure.html">Affiliate Disclosure</a> · <a href="mailto:contact@defendfam.com">Contact</a></div>
+      <div>© 2026 DefendFam · Educational content, not legal or financial advice.</div>
+    </div>
   </div>
 </footer>
  
@@ -687,7 +709,9 @@
     links.forEach(function (el) {
       el.addEventListener('click', function () { go(el.getAttribute('data-goto')); });
     });
-    go('home');
+    var validSections = ['home','teens','adults','elders','family','business','resources','about'];
+    var initialHash = window.location.hash.replace('#', '');
+    go(validSections.indexOf(initialHash) !== -1 ? initialHash : 'home');
   })();
 </script>
  
