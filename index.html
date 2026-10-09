@@ -31,6 +31,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:description" content="Independent guidance that helps families spot scams and protect their money, accounts, and identities. Free options come first.">
 <meta name="twitter:image" content="https://defendfam.com/og-image.png">
 <meta name="twitter:image:alt" content="DefendFam: independent cybersecurity guidance for families">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://defendfam.com/#organization",
+      "name": "DefendFam",
+      "alternateName": ["Defend Fam", "defendfam"],
+      "url": "https://defendfam.com/",
+      "logo": "https://defendfam.com/logo.png",
+      "description": "DefendFam is an independent cybersecurity guidance site for families. It explains the scams and identity threats targeting households and lists free fixes before paid ones.",
+      "email": "contact@defendfam.com",
+      "areaServed": "US",
+      "founder": [
+        {"@id": "https://defendfam.com/about.html#brad-neelan"},
+        {"@id": "https://defendfam.com/about.html#kent-kaufmann"}
+      ],
+      "parentOrganization": {"@type": "Organization", "legalName": "Stratemai LLC"}
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://defendfam.com/#website",
+      "name": "DefendFam",
+      "alternateName": "Defend Fam",
+      "url": "https://defendfam.com/",
+      "publisher": {"@id": "https://defendfam.com/#organization"}
+    }
+  ]
+}
+</script>
 <style>
   /* ================= v2 tokens (exact values, defendfam-v2-tokens-combined.css) ================= */
   *{box-sizing:border-box}
@@ -377,6 +408,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="eyebrow mono">Independent security guidance</div>
       <h1>Is the threat <span class="gradient-text">real?</span></h1>
       <p class="lede">Most identity-protection subscriptions defend you from threats you'll never face. Find out exactly where you're exposed before you sign another one.</p>
+      <p class="lede">DefendFam is independent guidance that helps families spot scams and protect their money, accounts, and identities. Free options come first.</p>
     </div>
  
     <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap;">
@@ -392,7 +424,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3>Growing up online, growing up targeted</h3>
         <p>From "free Robux" scams to AI-generated images, the platforms kids and teens already use are where the exposure is highest.</p>
         <div class="card-foot">
-          <div class="stat-row"><span class="stat-big mono">42% CAGR</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
           <span class="cta-link">Guidance for teens &amp; kids <span class="mono">→</span></span>
         </div>
       </button>
@@ -402,7 +433,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3>One reused password is the door to everything</h3>
         <p>Credential stuffing, phishing, and account takeover run on the same mechanic. The fix is simpler than the subscription.</p>
         <div class="card-foot">
-          <div class="stat-row"><span class="stat-big mono">88%</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
+          <div class="stat-row"><span class="stat-big mono">88%</span><span class="badge mono"><span class="dot">◆</span> Source verified · Verizon 2025 DBIR</span></div>
           <span class="cta-link">Guidance for adults <span class="mono">→</span></span>
         </div>
       </button>
@@ -410,9 +441,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="var(--accent)"/></svg></div>
         <div class="risk-label mono">For elders</div>
         <h3>The voice asking for money sounds exactly like family</h3>
-        <p>AI-cloned voices impersonate family in crisis. It's the fastest-growing fraud aimed at people over 60.</p>
+        <p>AI-cloned voices impersonate family in crisis.</p>
         <div class="card-foot">
-          <div class="stat-row"><span class="stat-big mono">$2.4B</span><span class="badge mono"><span class="dot">◆</span> Source verified</span></div>
+          <div class="stat-row"><span class="stat-big mono">$2.4B</span><span class="badge mono"><span class="dot">◆</span> Source verified · FTC (Dec 2025)</span></div>
           <span class="cta-link">Guidance for elders <span class="mono">→</span></span>
         </div>
       </button>
@@ -444,7 +475,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p style="font-size:15.5px;line-height:1.6;color:var(--text-muted);margin:0;">DefendFam earns affiliate commission on some tools we link to. That's exactly why our diagnosis comes first and the product comes last. If the honest answer is "you don't need to buy anything," we say so.</p>
           <div class="why-list">
             <div class="why-item"><span class="mark">◆</span><span class="txt">Threat-first, not product-first. We start with how you're actually exposed.</span></div>
-            <div class="why-item"><span class="mark">◆</span><span class="txt">Every statistic links to a primary source: FBI IC3, FTC, Verizon DBIR.</span></div>
+            <div class="why-item"><span class="mark">◆</span><span class="txt">We aim to trace each statistic to a primary source, such as FBI IC3, the FTC, and the Verizon DBIR.</span></div>
             <div class="why-item"><span class="mark">◆</span><span class="txt">Every recommendation is reviewed against the source data before it ships.</span></div>
           </div>
         </div>
@@ -466,21 +497,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="note-box" style="margin-bottom:8px;">A lot of the reporting behind these numbers is written about teenagers specifically, but the platforms involved, Roblox, Discord, Instagram, are used by much younger kids too. The same freeze-the-file, use-a-password-manager, talk-before-it-happens guidance applies earlier than most parents assume.</div>
  
       <div class="stat-grid">
-        <div class="stat-block">
-          <div class="stat-num">42%</div>
-          <div class="stat-desc">Annual growth rate of synthetic-identity fraud (the fastest-rising category), and minors are the preferred raw material.</div>
-          <div class="stat-source mono"><span>◆</span> Source verified · FTC / industry CAGR <span style="color:var(--text-muted);">[2]</span></div>
-        </div>
         <div class="panel" style="display:flex;flex-direction:column;justify-content:center;gap:16px;">
           <div style="font-size:13px;font-weight:600;color:var(--ink-mute);">Why the file is unguarded</div>
           <div style="display:flex;flex-direction:column;gap:14px;">
             <div>
-              <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;"><span style="color:var(--ink);">Teens who check their credit</span><span class="mono" style="color:var(--ink);font-weight:600;">~7%</span></div>
-              <div style="height:9px;background:var(--border-2);border-radius:5px;overflow:hidden;"><div style="width:7%;height:100%;background:var(--pink-60);border-radius:5px;"></div></div>
-            </div>
-            <div>
               <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;"><span style="color:var(--ink);">Fraud unnoticed until first loan/job</span><span class="mono" style="color:var(--ink);font-weight:600;">years</span></div>
-              <div style="height:9px;background:var(--border-2);border-radius:5px;overflow:hidden;"><div style="width:88%;height:100%;background:var(--accent);border-radius:5px;"></div></div>
             </div>
           </div>
         </div>
@@ -510,15 +531,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="block-label mono">The everyday scams kids and teens actually run into</div>
         <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;margin-bottom:16px;">This is where parent credibility gets built or lost. A warning about identity theft can feel abstract to a kid who's never seen it happen. A warning about the exact Robux scam a friend fell for last week lands immediately, at almost any age.</p>
         <div class="why-targeted-grid">
-          <div class="mini-card"><h4>"Free Robux" apps</h4><p>Suspected gaming fraud rose 53% year-over-year in 2026; Roblox alone saw ~1.65M attempted attacks. Spin-wheel apps keep players one step from a payout that never comes.</p></div>
+          <div class="mini-card"><h4>"Free Robux" apps</h4><p>Spin-wheel apps keep players one step from a payout that never comes.</p></div>
           <div class="mini-card"><h4>Discord escalation</h4><p>Roblox chat is filtered; Discord isn't. Predatory adults move conversations there, building rapport over days before asking for credentials or money.</p></div>
           <div class="mini-card"><h4>Fake Instagram brand deals</h4><p>A DM collaboration offer that leads to a phishing link or a "contract" asking for payment or login credentials before anything official happens.</p></div>
         </div>
       </div>
  
       <div class="section-block">
-        <div class="block-label mono">Financial sextortion: one of the fastest-growing threats to teens</div>
-        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;">NCMEC received more than 50,000 reports of financially motivated sextortion in 2025, an average of 137 a day, up from 36,000 the year before. The pattern: a stranger poses as a peer, moves the conversation to a private app, then extorts payment after getting an image. Reports skew heavily toward boys 14–17. The most important thing to say in advance: paying does not make it stop, and if it's already happened, the teen is not in trouble and not to blame.</p>
+        <div class="block-label mono">Financial sextortion</div>
+        <p style="font-size:14.5px;line-height:1.6;color:var(--ink-mute);max-width:64ch;">NCMEC received more than 50,000 reports of financially motivated sextortion in 2025, an average of 137 a day, up from 36,000 the year before. The pattern: a stranger poses as a peer, moves the conversation to a private app, then extorts payment after getting an image. The FBI says most victims are boys between 14 and 17. The most important thing to say in advance: paying does not make it stop, and if it's already happened, the teen is not in trouble and not to blame.</p>
       </div>
  
       <div class="section-block">
@@ -644,20 +665,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="panel">
           <div style="font-size:13px;font-weight:600;color:var(--ink-mute);margin-bottom:4px;">Imposter-scam losses, indexed</div>
           <div class="mono" style="font-size:11px;color:var(--text-muted);margin-bottom:22px;">2021 → 2025</div>
-          <div class="bars">
-            <div class="bar-col"><div class="bar" style="height:34%;background:var(--cyan-30);"></div><span class="mono" style="font-size:11px;color:var(--text-muted);">'21</span></div>
-            <div class="bar-col"><div class="bar" style="height:48%;background:var(--cyan-30);"></div><span class="mono" style="font-size:11px;color:var(--text-muted);">'22</span></div>
-            <div class="bar-col"><div class="bar" style="height:62%;background:var(--cyan-60);"></div><span class="mono" style="font-size:11px;color:var(--text-muted);">'23</span></div>
-            <div class="bar-col"><div class="bar" style="height:80%;background:var(--cyan-60);"></div><span class="mono" style="font-size:11px;color:var(--text-muted);">'24</span></div>
-            <div class="bar-col"><div class="bar" style="height:100%;background:var(--accent);"></div><span class="mono" style="font-size:11px;color:var(--ink);font-weight:600;">'25</span></div>
-          </div>
         </div>
       </div>
  
       <div class="section-block">
         <div class="block-label mono">Why elders are targeted</div>
         <div class="why-targeted-grid">
-          <div class="mini-card"><h4>Trust in the voice</h4><p>A familiar voice short-circuits skepticism. Cloning needs only seconds of audio from social media.</p></div>
+          <div class="mini-card"><h4>Trust in the voice</h4><p>A familiar voice short-circuits skepticism.</p></div>
           <div class="mini-card"><h4>Manufactured urgency</h4><p>"I'm in jail / in an accident, don't tell anyone." Panic is the exploit, not technology.</p></div>
           <div class="mini-card"><h4>Untraceable payment</h4><p>Gift cards, wire transfers and crypto are requested precisely because they can't be reversed.</p></div>
           <div class="mini-card"><h4>Isolation by design</h4><p>"Keep this between us" prevents the one thing that stops the scam: a second opinion.</p></div>
@@ -790,7 +804,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="art-body">
             <div class="art-cat mono">DEEPFAKE FRAUD · 6 MIN</div>
             <h3>The voice on the phone was your grandson. It wasn't.</h3>
-            <p>How three seconds of public audio becomes a convincing emergency call, and the one free habit that defeats it.</p>
+            <p>How public audio becomes a convincing emergency call, and the one free habit that defeats it.</p>
           </div>
         </article>
         <article>
@@ -805,7 +819,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="art-fig"><span class="mono">FIG · reuse attack graph</span></div>
           <div class="art-body">
             <div class="art-cat mono">ACCOUNT TAKEOVER · 7 MIN</div>
-            <h3>Password reuse is a solved problem. Here's why 81% still do it.</h3>
+            <h3>Password reuse is a solved problem. Here's why people still do it.</h3>
             <p>The fix takes an afternoon and is mostly free. We walk the exact setup, in priority order, with no upsell.</p>
           </div>
         </article>
@@ -816,24 +830,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ABOUT -->
   <section data-section="about">
     <div class="inner">
-      <div class="eyebrow mono">About &amp; methodology</div>
-      <h2 class="brief-h" style="max-width:20ch;">I built this because it happened to people I love.</h2>
-      <p class="about-lede">I've watched more than one person close to me, family and friends both, fall victim to exactly the kind of scams described on this site. I've spent 25 years in digital marketing and search, most recently leading search and AI-powered media for McAfee, one of the largest names in consumer cybersecurity, and it still happened to people I care about. That's the moment this stopped being a business idea and became personal.</p>
- 
-      <div class="section-block">
-        <div class="block-label mono">What I bring to this</div>
-        <p style="font-size:14.5px;line-height:1.65;color:var(--ink-mute);max-width:64ch;">Before McAfee, I built the search function at Intuit QuickBooks that contributed to the company's first billion-dollar revenue milestone, years spent deep in how financial platforms actually work, and how fraud tries to get around them. At McAfee, I saw firsthand how the identity-protection industry markets itself, what it gets right, and where it leans on fear instead of substance. That's the perspective DefendFam is built on.</p>
-      </div>
- 
-      <div class="section-block">
-        <div class="block-label mono">Why DefendFam exists</div>
-        <p style="font-size:14.5px;line-height:1.65;color:var(--ink-mute);max-width:64ch;">This site is how I give back what I know. Free guidance first, the cheapest or free fix listed before any paid one, and a paid recommendation only when it genuinely earns its place. DefendFam earns a commission on some of the tools linked here, disclosed plainly throughout, but the order things appear in is never for sale.</p>
-      </div>
- 
-      <div class="section-block">
-        <div class="block-label mono">How this content is built</div>
-        <p style="font-size:14.5px;line-height:1.65;color:var(--ink-mute);max-width:64ch;">Every statistic on this site traces back to a primary source, agencies like the FTC, the FBI's Internet Crime Complaint Center, NCMEC, and research from organizations like Verizon and the FIDO Alliance, not secondhand blog posts repeating each other. Where a claim is attributed to a named expert, that person is real and quoted from published, linkable reporting, never invented. Content gets revisited as new data comes out.</p>
-      </div>
+      <div class="eyebrow mono">About</div>
+      <h2 class="brief-h" style="max-width:20ch;">About DefendFam</h2>
+      <p class="about-lede">DefendFam is run by co-founders Brad Neelan and Kent Kaufmann, and operated by Stratemai LLC. <a href="/about.html">Read about us</a></p>
     </div>
   </section>
  
@@ -852,8 +851,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div>
         <div class="footer-label mono">Sources</div>
         <div class="footer-sources">
-          <span>[1] FTC Protecting Older Consumers Report (Dec 2025) · Hiya deepfake-call survey</span>
-          <span>[2] FTC synthetic-identity tracking · industry CAGR · NCMEC sextortion data (2025)</span>
+          <span>[1] FTC Protecting Older Consumers Report (Dec 2025)</span>
+          <span>[2] NCMEC sextortion data (2025)</span>
           <span>[3] TAKE IT DOWN Act (2025) · NCMEC Take It Down</span>
           <span>[4] Verizon 2025 Data Breach Investigations Report · FIDO Alliance 2025 survey</span>
         </div>
