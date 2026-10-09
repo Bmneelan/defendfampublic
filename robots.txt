@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://defendfam.com/sitemap.xml
